@@ -17,7 +17,7 @@ public class PlatformForwarderRoutePo {
     private String targetHttpApi;
     private String  targetHttpMethod;
     private Date createTime;
-    private Integer lastModified;
+    private Date lastModifiedTime;
     private Integer createUserId;
     private Integer lastModifiedUserId;
     private Byte messageRouteType;

@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jiappo.open.api.dao.mapper.PlatformForwarderRouteMapper" >
+<mapper namespace="com.jiappo.open.api.dao.mapper.openapi.PlatformForwarderRouteMapper" >
   <resultMap id="BaseResultMap" type="com.jiappo.open.api.support.model.po.PlatformForwarderRoutePo" >
-    <id column="id" property="id" jdbcType="INT" />
+    <id column="id" property="id" jdbcType="INTEGER" />
     <result column="platform_name" property="platformName" jdbcType="VARCHAR" />
     <result column="message_type" property="messageType" jdbcType="VARCHAR" />
     <result column="target_http_api" property="targetHttpApi" jdbcType="VARCHAR" />
     <result column="target_http_method" property="targetHttpMethod" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="last_modified" property="lastModified" jdbcType="INTEGER" />
+    <result column="last_modified_time" property="lastModifiedTime" jdbcType="TIMESTAMP" />
     <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
     <result column="last_modified_user_id" property="lastModifiedUserId" jdbcType="INTEGER" />
-    <result column="message_route_type" property="messageRouteType" jdbcType="BIT" />
+    <result column="message_route_type" property="messageRouteType" jdbcType="INTEGER" />
     <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
     <result column="activate_begin_time" property="activateBeginTime" jdbcType="TIMESTAMP" />
     <result column="expired_time" property="expiredTime" jdbcType="TIMESTAMP" />
   </resultMap>
 
-  <select id="queryRouteBy" resultMap="BaseResultMap">
+  <select id="queryRouteSingleBy" resultMap="BaseResultMap">
     SELECT
       id,
       platform_name,
@@ -25,7 +25,7 @@
       target_http_api,
       target_http_method,
       create_time,
-      last_modified,
+      last_modified_time,
       create_user_id,
       last_modified_user_id,
       message_route_type,

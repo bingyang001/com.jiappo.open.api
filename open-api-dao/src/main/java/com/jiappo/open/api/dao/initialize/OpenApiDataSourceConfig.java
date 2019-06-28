@@ -1,10 +1,7 @@
-package com.jiappo.open.api.dao.init;
+package com.jiappo.open.api.dao.initialize;
 
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.github.pagehelper.PageInterceptor;
-
-import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -21,18 +18,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Properties;
 
 /**
- * open api data source mysql
+ * open openapi data source mysql
  * Created by liguo on 2017/8/11.
  * @author liguo
  */
 @Configuration
-@MapperScan(value = {"com.jiappo.open.api.dao.mapper"}
+@MapperScan(value = {"com.jiappo.open.api.dao.mapper.openapi"}
         , sqlSessionFactoryRef = "openApiSessionFactory")
 @EnableTransactionManagement
 public class OpenApiDataSourceConfig {
@@ -42,30 +35,24 @@ public class OpenApiDataSourceConfig {
         sqlSessionFactoryBean.setDataSource(dataSource());
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        Resource[] resources = resolver.getResources("classpath*:mapper/hjclass/*.xml");
-        Resource[] resources2 = resolver.getResources("classpath*:mapper/mysqlhjclassuserdefined/*.xml");
-        List<Resource> list = new ArrayList<>();
-        Arrays.stream(resources).forEach(c -> list.add(c));
-        Arrays.stream(resources2).forEach(c -> list.add(c));
-        sqlSessionFactoryBean.setMapperLocations(list.toArray(new Resource[0]));
-        sqlSessionFactoryBean.setConfigLocation(resolver.getResource("classpath:spring/mybatis-settings.xml"));
+        Resource[] resources = resolver.getResources("classpath*:mapper/openapi/*.xml");
+        sqlSessionFactoryBean.setMapperLocations(resources);
 
         return sqlSessionFactoryBean.getObject();
     }
 
     @Primary
     @Bean(name = "openApiDataSource", initMethod = "init", destroyMethod = "close")
-    @ConfigurationProperties(prefix = "jdbc.hj_class_courseware")
+    @ConfigurationProperties(prefix = "jdbc.open-api")
     public DataSource dataSource() {
         DruidDataSource druidSource = new DruidDataSource();
-        //2018/06/23 设置默认的属性
         druidSource.setValidationQuery("select 1");
         druidSource.setTestWhileIdle(true);
-        //超过时间限制是否回收
+        //connection pool connection timeout abandoned
         druidSource.setRemoveAbandoned(true);
-        //超时时间；单位为秒。180秒=3分钟
+        //connection pool timeout 180s
         druidSource.setRemoveAbandonedTimeout(180);
-        //关闭abanded连接时输出错误日志
+        //output error log
         druidSource.setLogAbandoned(true);
 
         return druidSource;

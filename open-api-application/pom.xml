@@ -13,4 +13,22 @@
     <version>1.0.0-SNAPSHOT</version>
 
 
+    <dependencies>
+        <dependency>
+            <groupId>com.jiappo</groupId>
+            <artifactId>open-api-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jiappo</groupId>
+            <artifactId>open-api-support</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jiappo</groupId>
+            <artifactId>open-api-Integration</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jiappo</groupId>
+            <artifactId>open-api-repository</artifactId>
+        </dependency>
+    </dependencies>
 </project>

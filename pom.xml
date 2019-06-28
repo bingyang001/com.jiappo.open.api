@@ -12,6 +12,8 @@
         <module>open-api-Integration</module>
         <module>open-api-support</module>
         <module>open-api-application</module>
+        <module>open-api-test</module>
+        <module>open-api-facade</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -56,7 +58,6 @@
         <!-- add the rest controller list for swaggaer -->
         <rest-locations>com.hummer.hummer-framework.web</rest-locations>
         <slf4j-api.version>1.7.25</slf4j-api.version>
-        <junit.version>4.12</junit.version>
         <hummer.version>1.0.0-SNAPSHOT</hummer.version>
         <spring-boot.version>2.1.0.RELEASE</spring-boot.version>
         <httpasync.version>4.1.2</httpasync.version>
@@ -71,6 +72,9 @@
         <mybatis-spring.version>2.0.1</mybatis-spring.version>
 
         <open.api.version>1.0.0-SNAPSHOT</open.api.version>
+        <junit.version>4.12</junit.version>
+        <spring-boot-test.version>2.1.0.RELEASE</spring-boot-test.version>
+        <spring-test.version>5.1.2.RELEASE</spring-test.version>
     </properties>
 
     <dependencyManagement>
@@ -109,6 +113,7 @@
                 <version>${open.api.version}</version>
             </dependency>
             <!--hummer framework-->
+
             <dependency>
                 <groupId>com.hummer</groupId>
                 <artifactId>hummer-dao</artifactId>
@@ -136,6 +141,21 @@
             </dependency>
 
             <!--framework plugin-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring-test.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-test</artifactId>
+                <version>${spring-boot-test.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
@@ -213,11 +233,11 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>${common-lang3.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.projectlombok</groupId>-->
+                <!--<artifactId>lombok</artifactId>-->
+                <!--<version>${lombok.version}</version>-->
+            <!--</dependency>-->
             <dependency>
                 <groupId>commons-collections</groupId>
                 <artifactId>commons-collections</artifactId>

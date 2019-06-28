@@ -1,6 +1,6 @@
 package com.jiappo.open.api.integration;
 
-import com.jiappo.open.api.Application2;
+import com.jiappo.open.api.OpenApiApplication;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +15,7 @@ import java.util.Collections;
  */
 
 
-@SpringBootTest(classes = Application2.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = OpenApiApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("INTEGRATION_TEST")
 @ContextConfiguration
 public class CucumberRoot {
