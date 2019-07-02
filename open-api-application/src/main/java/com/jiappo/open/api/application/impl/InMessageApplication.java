@@ -1,9 +1,13 @@
 package com.jiappo.open.api.application.impl;
 
+import com.hummer.common.exceptions.AppException;
 import com.jiappo.open.api.application.facade.InMessageFacade;
-import com.jiappo.open.api.dao.mapper.openapi.PlatformForwarderRouteMapper;
+import com.jiappo.open.api.dao.mapper.openapi.MessageTransferRoutePoMapper;
+import com.jiappo.open.api.domain.route.Route;
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;
-import com.jiappo.open.api.support.model.po.PlatformForwarderRoutePo;
+import com.jiappo.open.api.support.model.po.MessageTransferRoutePo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +18,17 @@ import org.springframework.stereotype.Service;
  **/
 @Service
 public class InMessageApplication implements InMessageFacade {
+    private static final Logger LOGGER = LoggerFactory.getLogger(InMessageApplication.class);
     @Autowired
-    private PlatformForwarderRouteMapper routeMapper;
+    private MessageTransferRoutePoMapper routeMapper;
+    @Autowired
+    private Route route;
 
     @Override
     public Object inMessage(InMessageReq req) {
-        PlatformForwarderRoutePo po = routeMapper.queryRouteSingleBy("platform_A"
-                , "create_user", 0);
-        return null;
+        MessageTransferRoutePo po = routeMapper.queryRouteSingleBy(req.getPlatformName()
+                , req.getMessageType(), 0);
+        route.verified(req, po);
+        return route.transfer(po, req);
     }
 }

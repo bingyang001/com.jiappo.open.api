@@ -24,11 +24,11 @@
         </dependency>
         <dependency>
             <groupId>com.jiappo</groupId>
-            <artifactId>open-api-Integration</artifactId>
+            <artifactId>open-api-integration</artifactId>
         </dependency>
         <dependency>
             <groupId>com.jiappo</groupId>
-            <artifactId>open-api-repository</artifactId>
+            <artifactId>open-api-dao</artifactId>
         </dependency>
     </dependencies>
 </project>

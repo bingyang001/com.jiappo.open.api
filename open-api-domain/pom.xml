@@ -6,12 +6,20 @@
         <artifactId>jiappo-open-api</artifactId>
         <groupId>com.jiappo</groupId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <packaging>jar</packaging>
     <artifactId>open-api-domain</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.jiappo</groupId>
+            <artifactId>open-api-support</artifactId>
+        </dependency>
+    </dependencies>
 </project>

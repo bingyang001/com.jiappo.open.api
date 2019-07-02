@@ -10,7 +10,7 @@ import java.util.Date;
  * @Date: 2019/6/27 16:57
  **/
 @Data
-public class PlatformForwarderRoutePo {
+public class MessageTransferRoutePo {
     private Integer id;
     private String platformName;
     private String messageType;
@@ -24,4 +24,10 @@ public class PlatformForwarderRoutePo {
     private Boolean isDeleted;
     private Date activateBeginTime;
     private Date expiredTime;
+    private Integer callTargetTimeoutMillisecond;
+    private String routeImplService;
+    private String secretKey;
+    private String signType;
+    public String privateKey;
+    public String publicKey;
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jiappo.open.api.dao.mapper.openapi.PlatformForwarderRouteMapper" >
-  <resultMap id="BaseResultMap" type="com.jiappo.open.api.support.model.po.PlatformForwarderRoutePo" >
+<mapper namespace="com.jiappo.open.api.dao.mapper.openapi.MessageTransferRoutePoMapper" >
+  <resultMap id="BaseResultMap" type="com.jiappo.open.api.support.model.po.MessageTransferRoutePo" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="platform_name" property="platformName" jdbcType="VARCHAR" />
     <result column="message_type" property="messageType" jdbcType="VARCHAR" />
@@ -13,8 +13,11 @@
     <result column="last_modified_user_id" property="lastModifiedUserId" jdbcType="INTEGER" />
     <result column="message_route_type" property="messageRouteType" jdbcType="INTEGER" />
     <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
-    <result column="activate_begin_time" property="activateBeginTime" jdbcType="TIMESTAMP" />
-    <result column="expired_time" property="expiredTime" jdbcType="TIMESTAMP" />
+    <result column="secret_key_activate_begin_time" property="activateBeginTime" jdbcType="TIMESTAMP" />
+    <result column="secret_key_expired_time" property="expiredTime" jdbcType="TIMESTAMP" />
+    <result column="call_target_timeout_millisecond" property="callTargetTimeoutMillisecond" jdbcType="INTEGER"/>
+    <result column="route_impl_service" property="routeImplService" jdbcType="VARCHAR"/>
+    <result column="secret_key" property="secretKey" jdbcType="VARCHAR"/>
   </resultMap>
 
   <select id="queryRouteSingleBy" resultMap="BaseResultMap">
@@ -30,10 +33,13 @@
       last_modified_user_id,
       message_route_type,
       is_deleted,
-      activate_begint_ime,
-      expired_time
+      secret_key_activate_begin_time,
+      secret_key_expired_time,
+      call_target_timeout_millisecond,
+      route_impl_service,
+      secret_key
     FROM
-      platform_forwarder_route
+      route
     WHERE platform_name=#{platformName}
       AND message_type=#{messageType}
       AND message_route_type=#{messageRouteType}

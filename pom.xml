@@ -9,14 +9,13 @@
         <module>open-api</module>
         <module>open-api-domain</module>
         <module>open-api-dao</module>
-        <module>open-api-Integration</module>
+        <module>open-api-integration</module>
         <module>open-api-support</module>
         <module>open-api-application</module>
         <module>open-api-test</module>
         <module>open-api-facade</module>
     </modules>
     <packaging>pom</packaging>
-
     <name>jiappo-open-api</name>
     <description>jiappo-open-api project for Spring Boot</description>
 
@@ -75,6 +74,7 @@
         <junit.version>4.12</junit.version>
         <spring-boot-test.version>2.1.0.RELEASE</spring-boot-test.version>
         <spring-test.version>5.1.2.RELEASE</spring-test.version>
+        <cglib.version>3.2.5</cglib.version>
     </properties>
 
     <dependencyManagement>
@@ -94,12 +94,12 @@
             </dependency>
             <dependency>
                 <groupId>com.jiappo</groupId>
-                <artifactId>open-api-Integration</artifactId>
+                <artifactId>open-api-integration</artifactId>
                 <version>${open.api.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.jiappo</groupId>
-                <artifactId>open-api-repository</artifactId>
+                <artifactId>open-api-dao</artifactId>
                 <version>${open.api.version}</version>
             </dependency>
             <dependency>
@@ -136,11 +136,12 @@
             </dependency>
             <dependency>
                 <groupId>com.hummer</groupId>
-                <artifactId>hummer-support</artifactId>
+                <artifactId>hummer-common</artifactId>
                 <version>${hummer.version}</version>
             </dependency>
 
             <!--framework plugin-->
+
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
@@ -351,13 +352,11 @@
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-core</artifactId>
                 <version>${logback.version}</version>
-                <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
                 <version>${logback.version}</version>
-                <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>

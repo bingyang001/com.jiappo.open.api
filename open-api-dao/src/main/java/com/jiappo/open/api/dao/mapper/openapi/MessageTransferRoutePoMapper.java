@@ -1,7 +1,7 @@
 package com.jiappo.open.api.dao.mapper.openapi;
 
 
-import com.jiappo.open.api.support.model.po.PlatformForwarderRoutePo;
+import com.jiappo.open.api.support.model.po.MessageTransferRoutePo;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
  * @version:1.0.0
  * @Date: 2019/6/27 17:30
  **/
-public interface PlatformForwarderRouteMapper {
+public interface MessageTransferRoutePoMapper {
     /**
      * query message route
      *
@@ -21,7 +21,7 @@ public interface PlatformForwarderRouteMapper {
      * @date 2019/6/27 18:28
      * @version 1.0.0
      **/
-    PlatformForwarderRoutePo queryRouteSingleBy(@Param("platformName") String platformName
+    MessageTransferRoutePo queryRouteSingleBy(@Param("platformName") String platformName
             , @Param("messageType") String messageType
             , @Param("messageRouteType") Integer messageRouteType);
 }
