@@ -25,6 +25,9 @@ public class InMessageReq extends BaseOpenApiRequest {
      **/
     @ApiModelProperty(hidden = true)
     private String platformName;
+    /**
+     * message body
+     */
     @ApiModelProperty(value = "backup filed")
     private Collection<Map<String, Object>> data;
     /***
@@ -37,7 +40,9 @@ public class InMessageReq extends BaseOpenApiRequest {
      **/
     @NotEmpty(message = "sign cant null")
     private String sign;
-
+    /**
+     * secret key
+     */
     @ApiModelProperty(hidden = true)
     private String secretKey;
 }
