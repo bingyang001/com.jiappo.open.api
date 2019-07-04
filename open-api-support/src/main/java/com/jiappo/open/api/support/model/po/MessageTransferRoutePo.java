@@ -28,6 +28,6 @@ public class MessageTransferRoutePo {
     private String routeImplService;
     private String secretKey;
     private String signType;
-    public String privateKey;
-    public String publicKey;
+    private String publicKey;
+    private String privateKey;
 }

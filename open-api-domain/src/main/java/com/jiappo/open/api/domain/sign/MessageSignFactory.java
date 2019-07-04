@@ -10,10 +10,10 @@ import java.util.Set;
  * @since:1.0.0
  * @Date: 2019/7/2 19:04
  **/
-public class InMessageSignFactory {
+public class MessageSignFactory {
     private static final Set<String> SING_HASH_SET = Sets.newHashSetWithExpectedSize(3);
 
-    private InMessageSignFactory() {
+    private MessageSignFactory() {
 
     }
 
