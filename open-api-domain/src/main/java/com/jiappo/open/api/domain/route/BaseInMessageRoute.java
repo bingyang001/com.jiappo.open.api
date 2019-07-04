@@ -83,6 +83,7 @@ public abstract class BaseInMessageRoute implements Route {
      **/
     protected void verifiedSecretKey(String platformName, String reqSecretKey, String originSecretKey) {
         if (Strings.isNullOrEmpty(originSecretKey)) {
+            LOGGER.warn("please settings secret key in db.");
             return;
         }
 
@@ -103,11 +104,7 @@ public abstract class BaseInMessageRoute implements Route {
      * @date 2019/7/2 18:56
      * @since 1.0.0
      **/
-    protected void verifiedSign(InMessageReq inMessageReq, MessageTransferRoutePo po) {
-        InMessageSignFactory
-                .factory(po.getSignType())
-                .verified(inMessageReq, po);
-    }
+    protected abstract void verifiedSign(InMessageReq inMessageReq, MessageTransferRoutePo po);
 
     /**
      * verified md5
