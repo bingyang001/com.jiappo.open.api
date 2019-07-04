@@ -9,6 +9,11 @@ import com.jiappo.open.api.support.model.po.SignFieldPo;
  * @Date: 2019/7/2 19:02
  **/
 public interface InMessageSign {
+    Integer SIGN_STRING_NULL = 40001;
+    String SIGN_STRING_NULL_DOC = "sign can not null.";
+    Integer SIGN_VERIFIED_FAILED = 40002;
+    String SIGN_VERIFIED_FAILED_DOC = "sign verified failed";
+
     /**
      * verified
      *
