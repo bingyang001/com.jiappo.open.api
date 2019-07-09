@@ -1,9 +1,8 @@
 package com.jiappo.open.api.domain.sign;
 
 import com.google.common.collect.Maps;
-import com.hummer.common.utils.DateUtil;
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;
-import com.jiappo.open.api.support.model.po.SignFieldPo;
+import com.jiappo.open.api.support.model.bo.SignFieldBo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,10 +19,10 @@ import java.util.UUID;
  */
 public abstract class BaseMessageSign implements InMessageSign, OutMessageSign {
 
-    private static final Logger LOGGER= LoggerFactory.getLogger(BaseMessageSign.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BaseMessageSign.class);
 
     protected void appendToLog(InMessageReq req
-            , SignFieldPo po
+            , SignFieldBo po
             , String originValue) {
         LOGGER.info("");
     }
@@ -34,21 +33,25 @@ public abstract class BaseMessageSign implements InMessageSign, OutMessageSign {
      * @param inMessageReq          message
      * @param po                    file route
      * @param appendUUIDField       if true then append uuid to map
-     * @param appendSignExpiredTime if true append sign expired time to map
+     * @param appendSignExpiredTime if true then append sign expired time to map
      * @return
      */
     protected Map<String, Object> buildSignField(InMessageReq inMessageReq
-            , SignFieldPo po
+            , SignFieldBo po
             , boolean appendUUIDField
             , boolean appendSignExpiredTime) {
         Map<String, Object> fieldMap = Maps.newHashMapWithExpectedSize(16);
         if (appendUUIDField) {
             fieldMap.put("_uuid_", UUID.randomUUID().toString().replaceAll("-", ""));
         }
+
         if (appendSignExpiredTime) {
-            // TODO: 2019/7/4 add to minute  'po.getExpiredMinute()'
-            fieldMap.put("_expired_", DateUtil.formatNowData("yyyy-MM-dd HH:mm:ss"));
+            fieldMap.put("_expired_", po.getExpiredMinute());
+            LOGGER.info("message {} ,now time is {} after {} expired"
+                    , inMessageReq.getMessageType()
+                    , po.getExpiredMinute());
         }
+
         Set<String> keys = po.getFieldMap().keySet();
         Collection<Map<String, Object>> data = inMessageReq.getData();
         for (Map<String, Object> dataInfo : data) {

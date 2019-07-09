@@ -1,7 +1,7 @@
 package com.jiappo.open.api.domain.sign;
 
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;
-import com.jiappo.open.api.support.model.po.SignFieldPo;
+import com.jiappo.open.api.support.model.bo.SignFieldBo;
 
 /**
  * out message sign
@@ -17,7 +17,7 @@ public interface OutMessageSign {
      * @param po           route po
      * @return
      */
-    String createSign(InMessageReq inMessageReq, SignFieldPo po);
+    String createSign(InMessageReq inMessageReq, SignFieldBo po);
 
     /**
      * new encryption
@@ -26,5 +26,5 @@ public interface OutMessageSign {
      * @param po           po
      * @return
      */
-    String encryption(InMessageReq inMessageReq, SignFieldPo po);
+    String encryption(InMessageReq inMessageReq, SignFieldBo po);
 }

@@ -1,9 +1,9 @@
 package com.jiappo.open.api.domain.sign;
 
-import com.google.common.collect.Sets;
-import com.hummer.common.exceptions.AppException;
+import com.hummer.spring.plugin.context.SpringApplicationContext;
+import com.jiappo.open.api.domain.exception.ServiceProviderNotFindException;
 
-import java.util.Set;
+import java.util.Map;
 
 /**
  * @Author: lee
@@ -11,15 +11,25 @@ import java.util.Set;
  * @Date: 2019/7/2 19:04
  **/
 public class MessageSignFactory {
-    private static final Set<String> SING_HASH_SET = Sets.newHashSetWithExpectedSize(3);
 
-    private MessageSignFactory() {
+    /**
+     * factory sign instance.
+     *
+     * @param signType sign type aes or md5 or rsa
+     * @return com.jiappo.open.api.domain.sign.BaseMessageSign
+     * @author liguo
+     * @date 2019/7/9 13:55
+     * @since 1.0.0
+     **/
+    public static BaseMessageSign factory(final String signType) {
 
-    }
+        Map<String, BaseMessageSign> signMap = SpringApplicationContext
+                .getBeans(BaseMessageSign.class);
 
-    public static InMessageSign factory(String signType) {
-        if (!SING_HASH_SET.contains(signType)) {
-            throw new AppException(50001, String.format("sign type %s invalid", signType));
+        if (!signMap.containsKey(signType)) {
+            throw new ServiceProviderNotFindException(50000, "sig provider not find");
         }
+
+        return signMap.get(signType);
     }
 }

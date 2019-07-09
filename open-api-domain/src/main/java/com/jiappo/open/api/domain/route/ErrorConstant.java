@@ -32,5 +32,11 @@ public class ErrorConstant {
 
         public static final int SECRET_KEY_NO_MATCH_ERROR = 40006;
         public static final String SECRET_KEY_NO_MATCH_ERROR_DOC = "SecretKey error";
+
+        public static final int SIGN_VERIFIED_FAILED = 40007;
+        public static final String SIGN_VERIFIED_FAILED_DOC = "sign verified failed";
+
+        public static final int SIGN_STRING_NULL=40008;
+        public static final String SIGN_STRING_NULL_DOC="sign value can not null";
     }
 }

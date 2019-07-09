@@ -1,5 +1,7 @@
 package com.jiappo.open.api.domain.route;
 
+import com.jiappo.open.api.domain.sign.MessageSignFactory;
+import com.jiappo.open.api.support.model.bo.SignFieldBo;
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;
 import com.jiappo.open.api.support.model.po.MessageTransferRoutePo;
 import org.springframework.stereotype.Service;
@@ -12,17 +14,25 @@ import org.springframework.stereotype.Service;
 @Service
 public class DefaultInMessageRouteService extends BaseInMessageRoute {
     /**
-     * child class need impl transfer logic
+     * verified request sign
      *
-     * @param po
-     * @param req
-     * @return java.lang.Object
+     * @param inMessageReq request data
+     * @param po           route type
+     * @return void
      * @author liguo
-     * @date 2019/7/2 17:59
+     * @date 2019/7/2 18:56
      * @since 1.0.0
      **/
     @Override
-    public Object transfer(MessageTransferRoutePo po, InMessageReq req) {
-        return null;
+    protected void verifiedSign(InMessageReq inMessageReq, MessageTransferRoutePo po) {
+        SignFieldBo signFieldBo = SignFieldBo
+                .builder()
+                .expiredMinute(po.getSignExpiredTimeMinute())
+                .privateKey(po.getPrivateKey())
+                .publicKey(po.getPublicKey())
+                .useOneExpired(true)
+                .fieldMap(po.getSignField())
+                .build();
+        MessageSignFactory.factory(po.getSignImplService()).verified(inMessageReq, signFieldBo);
     }
 }

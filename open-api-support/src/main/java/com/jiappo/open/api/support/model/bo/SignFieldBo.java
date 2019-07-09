@@ -1,5 +1,6 @@
-package com.jiappo.open.api.support.model.po;
+package com.jiappo.open.api.support.model.bo;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.Map;
@@ -7,8 +8,9 @@ import java.util.Map;
 /**
  * sign field
  */
+@Builder
 @Data
-public class SignFieldPo {
+public class SignFieldBo {
     /**
      * sign field map
      */

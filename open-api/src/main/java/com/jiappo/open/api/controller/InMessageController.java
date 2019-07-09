@@ -18,6 +18,8 @@ import javax.validation.constraints.NotEmpty;
 
 
 /**
+ * out platform send to jia ppo site message
+ *
  * @Author: lee
  * @version:1.0.0
  * @Date: 2019/6/27 14:17
@@ -28,16 +30,18 @@ public class InMessageController {
     @Autowired
     private InMessageFacade inMessageFacade;
 
-    @PostMapping(value = "/in_message/{platform}")
+    @PostMapping(value = "/in_message/platform/{platform}/message/{messageType}")
     public ResourceResponse createNewUser(@PathVariable("platform")
                                           @NotEmpty(message = "platform can not null.") String platform
         , @RequestBody @Validated InMessageReq req
         , @RequestHeader(name = "secretKey") @NotEmpty(message = "secret key can not null.") String secretKey
+        , @PathVariable("messageType") String messageType
         , Errors errors) {
         //verify request body
         ParameterAssertUtil.assertRequestValidated(errors);
         //settings  platform name
         req.setPlatformName(platform);
+        req.setMessageType(messageType);
         req.setSecretKey(secretKey);
         //call business
         return ResourceResponse.ok(inMessageFacade.inMessage(req));

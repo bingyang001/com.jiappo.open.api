@@ -4,6 +4,7 @@ import com.jiappo.open.api.support.model.dto.BaseOpenApiRequest;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
@@ -16,6 +17,7 @@ import java.util.Map;
  * @version:1.0.0
  * @Date: 2019/6/27 15:39
  **/
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel(description = "all in site message.")
 public class InMessageReq extends BaseOpenApiRequest {
@@ -33,7 +35,7 @@ public class InMessageReq extends BaseOpenApiRequest {
     /***
      * message type . ie: create order,create user
      **/
-    @ApiModelProperty(value = "message business type")
+    @ApiModelProperty(value = "message business type",hidden = true)
     private String messageType;
     /**
      * body sign

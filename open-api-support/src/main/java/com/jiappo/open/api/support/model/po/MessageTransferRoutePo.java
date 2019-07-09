@@ -3,6 +3,7 @@ package com.jiappo.open.api.support.model.po;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @Author: lee
@@ -27,7 +28,9 @@ public class MessageTransferRoutePo {
     private Integer callTargetTimeoutMillisecond;
     private String routeImplService;
     private String secretKey;
-    private String signType;
+    private String signImplService;
     private String publicKey;
     private String privateKey;
+    private Map<String,Object> signField;
+    private Integer signExpiredTimeMinute;
 }

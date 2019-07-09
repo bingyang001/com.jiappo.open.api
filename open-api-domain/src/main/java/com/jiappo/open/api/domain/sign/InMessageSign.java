@@ -1,7 +1,8 @@
 package com.jiappo.open.api.domain.sign;
 
+import com.jiappo.open.api.domain.exception.SignAuthException;
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;
-import com.jiappo.open.api.support.model.po.SignFieldPo;
+import com.jiappo.open.api.support.model.bo.SignFieldBo;
 
 /**
  * @Author: lee
@@ -9,18 +10,14 @@ import com.jiappo.open.api.support.model.po.SignFieldPo;
  * @Date: 2019/7/2 19:02
  **/
 public interface InMessageSign {
-    Integer SIGN_STRING_NULL = 40001;
-    String SIGN_STRING_NULL_DOC = "sign can not null.";
-    Integer SIGN_VERIFIED_FAILED = 40002;
-    String SIGN_VERIFIED_FAILED_DOC = "sign verified failed";
-
     /**
-     * verified
+     * verified,if failed then throw {@link SignAuthException}
      *
-     * @param inMessageReq
-     * @param po
+     * @param inMessageReq message
+     * @param po           sign field
+     * @throws SignAuthException
      */
-    void verified(InMessageReq inMessageReq, SignFieldPo po);
+    void verified(InMessageReq inMessageReq, SignFieldBo po);
 
     /**
      * decrypt
@@ -28,5 +25,5 @@ public interface InMessageSign {
      * @param inMessageReq in message
      * @param po           route po
      */
-    void decrypt(InMessageReq inMessageReq, SignFieldPo po);
+    void decrypt(InMessageReq inMessageReq, SignFieldBo po);
 }
