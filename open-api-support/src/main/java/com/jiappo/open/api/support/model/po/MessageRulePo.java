@@ -11,7 +11,7 @@ import java.util.Map;
  * @Date: 2019/6/27 16:57
  **/
 @Data
-public class MessageTransferRoutePo {
+public class MessageRulePo {
     private Integer id;
     private String platformName;
     private String messageType;

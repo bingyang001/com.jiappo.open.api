@@ -1,9 +1,9 @@
-package com.jiappo.open.api.domain.sign.impl;
+package com.jiappo.open.api.domain.ticket.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.hummer.common.security.Md5;
 import com.jiappo.open.api.domain.exception.SignAuthException;
-import com.jiappo.open.api.domain.sign.BaseMessageSign;
+import com.jiappo.open.api.domain.ticket.BaseMessageTicket;
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;
 import com.jiappo.open.api.support.model.bo.SignFieldBo;
 import org.apache.logging.log4j.util.Strings;
@@ -13,10 +13,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
-import static com.jiappo.open.api.domain.route.ErrorConstant.SignError.SIGN_STRING_NULL;
-import static com.jiappo.open.api.domain.route.ErrorConstant.SignError.SIGN_STRING_NULL_DOC;
-import static com.jiappo.open.api.domain.route.ErrorConstant.SignError.SIGN_VERIFIED_FAILED;
-import static com.jiappo.open.api.domain.route.ErrorConstant.SignError.SIGN_VERIFIED_FAILED_DOC;
+import static com.jiappo.open.api.domain.service.ErrorConstant.SignError.SIGN_STRING_NULL;
+import static com.jiappo.open.api.domain.service.ErrorConstant.SignError.SIGN_STRING_NULL_DOC;
+import static com.jiappo.open.api.domain.service.ErrorConstant.SignError.SIGN_VERIFIED_FAILED;
+import static com.jiappo.open.api.domain.service.ErrorConstant.SignError.SIGN_VERIFIED_FAILED_DOC;
 
 /**
  * this class is default impl message verified md5 strategy
@@ -25,8 +25,8 @@ import static com.jiappo.open.api.domain.route.ErrorConstant.SignError.SIGN_VERI
  * @since 1.0.0
  */
 @Service
-public class Md5MessageSignDefault extends BaseMessageSign {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Md5MessageSignDefault.class);
+public class Md5MessageTicketDefault extends BaseMessageTicket {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Md5MessageTicketDefault.class);
 
     @Override
     public void verified(InMessageReq inMessageReq, SignFieldBo po) {

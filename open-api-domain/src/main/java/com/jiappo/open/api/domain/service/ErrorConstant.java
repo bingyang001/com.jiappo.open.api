@@ -1,4 +1,4 @@
-package com.jiappo.open.api.domain.route;
+package com.jiappo.open.api.domain.service;
 
 /**
  * @Author: lee

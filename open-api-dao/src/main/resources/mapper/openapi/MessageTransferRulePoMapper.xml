@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jiappo.open.api.dao.mapper.openapi.MessageTransferRoutePoMapper" >
-  <resultMap id="BaseResultMap" type="com.jiappo.open.api.support.model.po.MessageTransferRoutePo" >
+<mapper namespace="com.jiappo.open.api.dao.mapper.openapi.MessageTransferRulePoMapper" >
+  <resultMap id="BaseResultMap" type="com.jiappo.open.api.support.model.po.MessageRulePo" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="platform_name" property="platformName" jdbcType="VARCHAR" />
     <result column="message_type" property="messageType" jdbcType="VARCHAR" />

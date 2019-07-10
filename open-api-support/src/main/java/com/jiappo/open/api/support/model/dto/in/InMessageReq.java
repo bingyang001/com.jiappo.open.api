@@ -32,10 +32,14 @@ public class InMessageReq extends BaseOpenApiRequest {
      */
     @ApiModelProperty(value = "backup filed")
     private Collection<Map<String, Object>> data;
+    /**
+     * message batch id,need unique
+     **/
+    private String batchId;
     /***
      * message type . ie: create order,create user
      **/
-    @ApiModelProperty(value = "message business type",hidden = true)
+    @ApiModelProperty(value = "message business type", hidden = true)
     private String messageType;
     /**
      * body sign

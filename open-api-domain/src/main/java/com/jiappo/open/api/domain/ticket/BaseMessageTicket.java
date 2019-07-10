@@ -1,4 +1,4 @@
-package com.jiappo.open.api.domain.sign;
+package com.jiappo.open.api.domain.ticket;
 
 import com.google.common.collect.Maps;
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;
@@ -17,15 +17,9 @@ import java.util.UUID;
  * @author bingy
  * @since 1.0.0
  */
-public abstract class BaseMessageSign implements InMessageSign, OutMessageSign {
+public abstract class BaseMessageTicket implements InMessageSign, OutMessageSign {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(BaseMessageSign.class);
-
-    protected void appendToLog(InMessageReq req
-            , SignFieldBo po
-            , String originValue) {
-        LOGGER.info("");
-    }
+    private static final Logger LOGGER = LoggerFactory.getLogger(BaseMessageTicket.class);
 
     /**
      * builder will sign field map

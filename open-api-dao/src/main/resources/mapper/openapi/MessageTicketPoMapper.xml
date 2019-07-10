@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiappo.open.api.dao.mapper.openapi.MessageTicketPoMapper" >
+  <resultMap id="BaseResultMap" type="com.jiappo.open.api.support.model.po.MessageTicketRecordPo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="platform_name" property="platformName" jdbcType="VARCHAR" />
+    <result column="message_type" property="messageType" jdbcType="VARCHAR" />
+    <result column="message_id" property="messageId" jdbcType="VARCHAR" />
+    <result column="sign_value" property="signValue" jdbcType="VARCHAR" />
+    <result column="sign_type" property="signType" jdbcType="INTEGER"/>
+    <result column="verified_status" property="verifiedStatus" jdbcType="INTEGER" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP"/>
+    <result column="expired_date" property="expiredDate" jdbcType="INTEGER" />
+    <result column="verified_date" property="verifiedDate" jdbcType="TIMESTAMP" />
+    <result column="verified_describe" property="verifiedDescribe" jdbcType="VARCHAR"/>
+
+  </resultMap>
+
+  <insert id="saveTicket"
+          parameterType="com.jiappo.open.api.support.model.po.MessageTicketRecordPo"
+          useGeneratedKeys="true"
+          keyProperty="id">
+    insert into message_ticket_record (
+                                       platform_name
+                                        ,message_type
+                                        ,message_id
+                                        ,sign_value
+                                        ,sign_type
+                                        ,expired_date) values
+                                (#{ticketRecordPo.platformName}
+                                ,#{ticketRecordPo.messageType}
+                                ,#{ticketRecordPo.messageId}
+                                ,#{ticketRecordPo.signValue}
+                                ,#{ticketRecordPo.signType}
+                                ,#{ticketRecordPo.expiredDate})
+  </insert>
+</mapper>
