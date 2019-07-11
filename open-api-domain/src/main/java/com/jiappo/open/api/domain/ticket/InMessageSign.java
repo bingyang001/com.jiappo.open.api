@@ -2,7 +2,7 @@ package com.jiappo.open.api.domain.ticket;
 
 import com.jiappo.open.api.domain.exception.SignAuthException;
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;
-import com.jiappo.open.api.support.model.bo.SignFieldBo;
+import com.jiappo.open.api.support.model.bo.TicketFieldBo;
 
 /**
  * @Author: lee
@@ -17,7 +17,7 @@ public interface InMessageSign {
      * @param po           sign field
      * @throws SignAuthException
      */
-    void verified(InMessageReq inMessageReq, SignFieldBo po);
+    void verified(InMessageReq inMessageReq, TicketFieldBo po);
 
     /**
      * decrypt
@@ -25,5 +25,5 @@ public interface InMessageSign {
      * @param inMessageReq in message
      * @param po           route po
      */
-    void decrypt(InMessageReq inMessageReq, SignFieldBo po);
+    void decrypt(InMessageReq inMessageReq, TicketFieldBo po);
 }

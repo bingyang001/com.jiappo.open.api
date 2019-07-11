@@ -7,10 +7,11 @@ import java.util.Map;
 
 /**
  * sign field
+ * @author bingy
  */
 @Builder
 @Data
-public class SignFieldBo {
+public class TicketFieldBo {
     /**
      * sign field map
      */
@@ -37,4 +38,5 @@ public class SignFieldBo {
      * </p>
      */
     private String publicKey;
+    private Boolean isPreCreated;
 }

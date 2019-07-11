@@ -1,7 +1,7 @@
 package com.jiappo.open.api.domain.ticket;
 
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;
-import com.jiappo.open.api.support.model.bo.SignFieldBo;
+import com.jiappo.open.api.support.model.bo.TicketFieldBo;
 
 /**
  * out message sign
@@ -17,7 +17,7 @@ public interface OutMessageSign {
      * @param po           route po
      * @return
      */
-    String createSign(InMessageReq inMessageReq, SignFieldBo po);
+    String createSign(InMessageReq inMessageReq, TicketFieldBo po);
 
     /**
      * new encryption
@@ -26,5 +26,5 @@ public interface OutMessageSign {
      * @param po           po
      * @return
      */
-    String encryption(InMessageReq inMessageReq, SignFieldBo po);
+    String encryption(InMessageReq inMessageReq, TicketFieldBo po);
 }

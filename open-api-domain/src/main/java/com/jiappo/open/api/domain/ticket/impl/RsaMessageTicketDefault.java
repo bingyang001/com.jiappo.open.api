@@ -6,7 +6,7 @@ import com.hummer.common.security.Rsa;
 import com.jiappo.open.api.domain.exception.SignAuthException;
 import com.jiappo.open.api.domain.ticket.BaseMessageTicket;
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;
-import com.jiappo.open.api.support.model.bo.SignFieldBo;
+import com.jiappo.open.api.support.model.bo.TicketFieldBo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -25,12 +25,12 @@ public class RsaMessageTicketDefault extends BaseMessageTicket {
     private static final Logger LOGGER = LoggerFactory.getLogger(RsaMessageTicketDefault.class);
 
     @Override
-    public void verified(InMessageReq inMessageReq, SignFieldBo po) {
+    public void verified(InMessageReq inMessageReq, TicketFieldBo po) {
         decrypt(inMessageReq, po);
     }
 
     @Override
-    public void decrypt(InMessageReq inMessageReq, SignFieldBo po) {
+    public void decrypt(InMessageReq inMessageReq, TicketFieldBo po) {
         String decrypt = Rsa.decrypt(inMessageReq.getSign(), po.getPrivateKey());
         if (Strings.isNullOrEmpty(decrypt)) {
             LOGGER.error("platform {} message type {} rsa decrypt failed", inMessageReq.getPlatformName()
@@ -40,12 +40,12 @@ public class RsaMessageTicketDefault extends BaseMessageTicket {
     }
 
     @Override
-    public String createSign(InMessageReq inMessageReq, SignFieldBo po) {
+    public String createSign(InMessageReq inMessageReq, TicketFieldBo po) {
         return encryption(inMessageReq, po);
     }
 
     @Override
-    public String encryption(InMessageReq inMessageReq, SignFieldBo po) {
+    public String encryption(InMessageReq inMessageReq, TicketFieldBo po) {
         Map<String, Object> fieldMap = buildSignField(inMessageReq
                 , po
                 , true

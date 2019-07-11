@@ -7,23 +7,18 @@ import java.util.Date;
 /**
  * @Author: lee
  * @since:1.0.0
- * @Date: 2019/7/10 16:16
+ * @Date: 2019/7/11 15:49
  **/
 @Data
-public class MessageTicketRecordPo {
-
+public class TicketVerifiedRecordPo {
     private Integer id;
     private String platformName;
     private String messageType;
+    private String messageId;
     private String ticketValue;
     private String ticketType;
     private Integer verifiedStatus;
-    private Integer expiredDate;
-    private Date verifiedDate;
-    private Date createdDate;
     private String verifiedDescribe;
-    private String messageId;
-    private String ticketMd5;
-    private Boolean isDelete;
-    private Boolean isPreCreated;
+    private Date verifiedDate;
+    private String secretKey;
 }

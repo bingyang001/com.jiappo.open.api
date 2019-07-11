@@ -1,5 +1,6 @@
 package com.jiappo.open.api.domain.eventbus;
 
+import com.jiappo.open.api.domain.exception.SecretKeyAuthException;
 import com.jiappo.open.api.domain.exception.SignAuthException;
 import com.jiappo.open.api.domain.ticket.VerifiedStatusEnum;
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;
@@ -19,7 +20,6 @@ public class VerifiedSignEvent {
     private String platformName;
     private String messageType;
     private String messageId;
-    private String signValue;
     private String secretKey;
     private Integer verifiedStatus;
     private String verifiedType;
@@ -27,6 +27,8 @@ public class VerifiedSignEvent {
     private Date verifiedDate = new Date();
     private String verifiedDescribe;
     private Throwable throwable;
+    private String originTicket;
+    private Integer recordId;
 
     /**
      * verified success
@@ -49,8 +51,8 @@ public class VerifiedSignEvent {
                 .messageType(req.getMessageType())
                 .verifiedDate(new Date())
                 .secretKey(req.getSecretKey())
-                .signValue(req.getSign())
                 .messageId(req.getBatchId())
+                .originTicket(req.getSign())
                 .build();
     }
 
@@ -68,12 +70,16 @@ public class VerifiedSignEvent {
     public static VerifiedSignEvent failed(final InMessageReq req
             , final Throwable throwable, final String verifiedType) {
         String tempVerifiedType = verifiedType(verifiedType);
-        int errorCode = 2;
+        int errorCode = VerifiedStatusEnum.VERIFIED_FAILED.getCode();
+        String signValue= "sign".equals(verifiedType)?req.getSign():req.getSecretKey();
         String errorMessage;
         if (throwable instanceof SignAuthException) {
             errorCode = ((SignAuthException) throwable).getErrorCode();
             errorMessage = throwable.getMessage();
-        } else {
+        } else if (throwable instanceof SecretKeyAuthException){
+            errorCode = ((SecretKeyAuthException) throwable).getErrorCode();
+            errorMessage = throwable.getMessage();
+        } else{
             errorMessage = throwable.toString();
         }
 
@@ -86,8 +92,8 @@ public class VerifiedSignEvent {
                 .messageType(req.getMessageType())
                 .verifiedDate(new Date())
                 .secretKey(req.getSecretKey())
-                .signValue(req.getSign())
                 .messageId(req.getBatchId())
+                .originTicket(req.getSign())
                 .build();
     }
 

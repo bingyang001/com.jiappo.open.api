@@ -6,32 +6,87 @@
     <result column="platform_name" property="platformName" jdbcType="VARCHAR" />
     <result column="message_type" property="messageType" jdbcType="VARCHAR" />
     <result column="message_id" property="messageId" jdbcType="VARCHAR" />
-    <result column="sign_value" property="signValue" jdbcType="VARCHAR" />
-    <result column="sign_type" property="signType" jdbcType="INTEGER"/>
+    <result column="ticket_value" property="ticketValue" jdbcType="VARCHAR" />
+    <result column="ticket_type" property="ticketType" jdbcType="INTEGER"/>
     <result column="verified_status" property="verifiedStatus" jdbcType="INTEGER" />
     <result column="created_date" property="createdDate" jdbcType="TIMESTAMP"/>
     <result column="expired_date" property="expiredDate" jdbcType="INTEGER" />
-    <result column="verified_date" property="verifiedDate" jdbcType="TIMESTAMP" />
-    <result column="verified_describe" property="verifiedDescribe" jdbcType="VARCHAR"/>
-
+    <result column="ticket_md5" property="ticketMd5" jdbcType="VARCHAR"/>
+    <result column="is_delete" property="isDelete" jdbcType="BIT"/>
+    <result column="is_precreated" property="isPreCreated" jdbcType="BIT"/>
   </resultMap>
 
-  <insert id="saveTicket"
-          parameterType="com.jiappo.open.api.support.model.po.MessageTicketRecordPo"
-          useGeneratedKeys="true"
-          keyProperty="id">
-    insert into message_ticket_record (
-                                       platform_name
-                                        ,message_type
-                                        ,message_id
-                                        ,sign_value
-                                        ,sign_type
-                                        ,expired_date) values
-                                (#{ticketRecordPo.platformName}
-                                ,#{ticketRecordPo.messageType}
-                                ,#{ticketRecordPo.messageId}
-                                ,#{ticketRecordPo.signValue}
-                                ,#{ticketRecordPo.signType}
-                                ,#{ticketRecordPo.expiredDate})
-  </insert>
+      <insert id="saveTicket"
+              parameterType="com.jiappo.open.api.support.model.po.MessageTicketRecordPo"
+              useGeneratedKeys="true"
+              keyProperty="id">
+        insert into ticket_record (
+                                             ticket_md5
+                                            ,platform_name
+                                            ,message_type
+                                            ,message_id
+                                            ,ticket_value
+                                            ,ticket_type
+                                            ,expired_date
+                                            ,is_precreated) values
+                                    (#{ticketRecordPo.ticketMd5}
+                                    ,#{ticketRecordPo.platformName}
+                                    ,#{ticketRecordPo.messageType}
+                                    ,#{ticketRecordPo.messageId}
+                                    ,#{ticketRecordPo.ticketValue}
+                                    ,#{ticketRecordPo.ticketType}
+                                    ,#{ticketRecordPo.expiredDate}
+                                    ,#{ticketRecordPo.isPreCreated})
+      </insert>
+
+    <insert id="saveNewTicketVerifiedResult"  parameterType="com.jiappo.open.api.support.model.po.MessageTicketRecordPo"
+            useGeneratedKeys="true"
+            keyProperty="id">
+        insert into ticket_record (
+            ticket_md5
+            ,platform_name
+            ,message_type
+            ,message_id
+            ,ticket_value
+            ,ticket_type
+            ,expired_date
+            ,is_precreated
+            ,verified_date
+            ,verified_status) values
+        (#{ticketRecordPo.ticketMd5}
+            ,#{ticketRecordPo.platformName}
+            ,#{ticketRecordPo.messageType}
+            ,#{ticketRecordPo.messageId}
+            ,#{ticketRecordPo.ticketValue}
+            ,#{ticketRecordPo.ticketType}
+            ,#{ticketRecordPo.expiredDate}
+            ,#{ticketRecordPo.isPreCreated}
+            ,#{ticketRecordPo.verifiedDate}
+            ,#{ticketRecordPo.verifiedStatus})
+    </insert>
+
+    <select id="querySingleTicket" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select id
+                ,ticket_md5
+                ,platform_name
+                ,message_type
+                ,message_id
+                ,ticket_value
+                ,ticket_type
+                ,verified_status
+                ,created_date
+                ,expired_date
+                ,verified_date
+                ,is_delete
+
+        from ticket_record where ticket_md5=#{ticketMd5Value};
+
+    </select>
+
+    <update id="setTicketVerifiedResult" parameterType="com.jiappo.open.api.support.model.po.MessageTicketRecordPo">
+        update ticket_record set
+                                         verified_status=#{ticketRecordPo.verifiedStatus}
+                                         ,verified_date=now()
+         where id=#{ticketRecordPo.id}
+    </update>
 </mapper>

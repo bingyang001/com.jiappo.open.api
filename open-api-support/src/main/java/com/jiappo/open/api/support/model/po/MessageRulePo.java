@@ -28,9 +28,10 @@ public class MessageRulePo {
     private Integer callTargetTimeoutMillisecond;
     private String routeImplService;
     private String secretKey;
-    private String signImplService;
+    private String ticketImplService;
     private String publicKey;
     private String privateKey;
-    private Map<String,Object> signField;
-    private Integer signExpiredTimeMinute;
+    private Map<String,Object> ticketField;
+    private Integer ticketExpiredTimeMinute;
+    private Boolean isPreCreated;
 }

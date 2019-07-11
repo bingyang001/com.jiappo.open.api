@@ -24,8 +24,8 @@ import java.util.Date;
  * @since:1.0.0
  * @Date: 2019/7/2 17:30
  **/
-public abstract class BaseInMessageHandle implements InMessageHandle {
-    private final static Logger LOGGER = LoggerFactory.getLogger(BaseInMessageHandle.class);
+public abstract class BaseInMessageHandleService implements InMessageHandle {
+    private final static Logger LOGGER = LoggerFactory.getLogger(BaseInMessageHandleService.class);
     @Autowired
     private EventBus eventBus;
 
@@ -57,10 +57,10 @@ public abstract class BaseInMessageHandle implements InMessageHandle {
         try {
             verifiedSign(inMessageReq, po);
             eventBus.post(VerifiedSignEvent
-                    .success(inMessageReq,"sing"));
+                    .success(inMessageReq,"sign"));
         } catch (Throwable throwable) {
             eventBus.post(VerifiedSignEvent
-                    .failed(inMessageReq,throwable,"sing"));
+                    .failed(inMessageReq,throwable,"sign"));
             throw throwable;
         }
     }

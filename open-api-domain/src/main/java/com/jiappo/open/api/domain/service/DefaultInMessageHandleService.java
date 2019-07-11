@@ -2,8 +2,9 @@ package com.jiappo.open.api.domain.service;
 
 import com.google.common.base.Strings;
 import com.hummer.common.exceptions.AppException;
+import com.jiappo.open.api.domain.exception.SecretKeyAuthException;
 import com.jiappo.open.api.domain.ticket.MessageSignFactory;
-import com.jiappo.open.api.support.model.bo.SignFieldBo;
+import com.jiappo.open.api.support.model.bo.TicketFieldBo;
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;
 import com.jiappo.open.api.support.model.po.MessageRulePo;
 import org.slf4j.Logger;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Service;
  * @Date: 2019/7/2 17:55
  **/
 @Service
-public class DefaultInMessageHandleService extends BaseInMessageHandle {
+public class DefaultInMessageHandleService extends BaseInMessageHandleService {
     private final static Logger LOGGER = LoggerFactory.getLogger(DefaultInMessageHandleService.class);
     /**
      * verified request secret key ,if failed then throw app exception. child class can override
@@ -38,7 +39,7 @@ public class DefaultInMessageHandleService extends BaseInMessageHandle {
 
         if (!originSecretKey.equals(reqSecretKey)) {
             LOGGER.error("{} request secret key not match", platformName);
-            throw new AppException(ErrorConstant.SignError.SECRET_KEY_NO_MATCH_ERROR
+            throw new SecretKeyAuthException(ErrorConstant.SignError.SECRET_KEY_NO_MATCH_ERROR
                     , ErrorConstant.SignError.SECRET_KEY_NO_MATCH_ERROR_DOC);
         }
     }
@@ -56,14 +57,17 @@ public class DefaultInMessageHandleService extends BaseInMessageHandle {
     @Override
     protected void verifiedSign(InMessageReq inMessageReq, MessageRulePo po) {
 
-        SignFieldBo signFieldBo = SignFieldBo
+        TicketFieldBo ticketFieldBo = TicketFieldBo
                 .builder()
-                .expiredMinute(po.getSignExpiredTimeMinute())
+                .expiredMinute(po.getTicketExpiredTimeMinute())
                 .privateKey(po.getPrivateKey())
                 .publicKey(po.getPublicKey())
                 .useOneExpired(true)
-                .fieldMap(po.getSignField())
+                .fieldMap(po.getTicketField())
+                .isPreCreated(po.getIsPreCreated())
                 .build();
-        MessageSignFactory.factory(po.getSignImplService()).verified(inMessageReq, signFieldBo);
+        MessageSignFactory
+                .factory(po.getTicketImplService())
+                .verifiedTicket(inMessageReq, ticketFieldBo);
     }
 }

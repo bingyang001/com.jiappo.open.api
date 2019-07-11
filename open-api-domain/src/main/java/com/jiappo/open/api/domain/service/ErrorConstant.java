@@ -36,7 +36,16 @@ public class ErrorConstant {
         public static final int SIGN_VERIFIED_FAILED = 40007;
         public static final String SIGN_VERIFIED_FAILED_DOC = "sign verified failed";
 
-        public static final int SIGN_STRING_NULL=40008;
-        public static final String SIGN_STRING_NULL_DOC="sign value can not null";
+        public static final int SIGN_STRING_NULL = 40008;
+        public static final String SIGN_STRING_NULL_DOC = "sign value can not null";
+
+        public static final int SIGN_STRING_ALREADY_USED = 40009;
+        public static final String SIGN_STRING_ALREAD_USED_DOC = "ticket already used";
+
+        public static final int SIGN_STRING_ALREADY_EXPIRED = 40010;
+        public static final String SIGN_STRING_ALREAD_EXPIRED_DOC = "ticket already expired";
+
+        public static final int SIGN_STRING_NO_EXISTS = 40011;
+        public static final String SIGN_STRING_NO_EXISTS_DOC = "ticket no exists";
     }
 }

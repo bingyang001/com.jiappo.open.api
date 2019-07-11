@@ -26,10 +26,21 @@ public enum VerifiedStatusEnum {
         this.message = message;
     }
 
+    public static VerifiedStatusEnum getByCode(int code) {
+        for (VerifiedStatusEnum statusEnum : VerifiedStatusEnum.values()) {
+            if (code == statusEnum.code) {
+                return statusEnum;
+            }
+        }
+
+        return VERIFIED_FAILED;
+    }
+
     public int getCode() {
         return code;
     }
 
     public String getMessage() {
         return message;
-    }}
+    }
+}
