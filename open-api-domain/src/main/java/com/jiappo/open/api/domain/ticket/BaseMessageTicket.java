@@ -107,7 +107,7 @@ public abstract class BaseMessageTicket implements InMessageSign, OutMessageSign
             throw new SignAuthException(SIGN_STRING_ALREADY_USED, SIGN_STRING_ALREAD_USED_DOC);
         }
 
-        Date expiredTime = DateUtil.addMinute(ticketRecordPo.getCreatedDate(), po.getExpiredMinute());
+        Date expiredTime = DateUtil.addMinute(ticketRecordPo.getCreatedDate(), ticketRecordPo.getExpiredDate());
         long diffMinute = DateUtil.subtractNowDate(expiredTime) / 1000 / 60;
 
         if (diffMinute <= 0) {

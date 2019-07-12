@@ -14,6 +14,8 @@
     <result column="ticket_md5" property="ticketMd5" jdbcType="VARCHAR"/>
     <result column="is_delete" property="isDelete" jdbcType="BIT"/>
     <result column="is_precreated" property="isPreCreated" jdbcType="BIT"/>
+    <result column="data_body" property="dataBody" javaType="java.util.Collection"
+            typeHandler="com.jiappo.open.api.support.mybatis.JsonReferenceHandle" />
   </resultMap>
 
       <insert id="saveTicket"
@@ -28,7 +30,8 @@
                                             ,ticket_value
                                             ,ticket_type
                                             ,expired_date
-                                            ,is_precreated) values
+                                            ,is_precreated
+                                            ,data_body) values
                                     (#{ticketRecordPo.ticketMd5}
                                     ,#{ticketRecordPo.platformName}
                                     ,#{ticketRecordPo.messageType}
@@ -36,7 +39,8 @@
                                     ,#{ticketRecordPo.ticketValue}
                                     ,#{ticketRecordPo.ticketType}
                                     ,#{ticketRecordPo.expiredDate}
-                                    ,#{ticketRecordPo.isPreCreated})
+                                    ,#{ticketRecordPo.isPreCreated}
+                                    ,#{ticketRecordPo.dataBody})
       </insert>
 
     <insert id="saveNewTicketVerifiedResult"  parameterType="com.jiappo.open.api.support.model.po.MessageTicketRecordPo"
@@ -78,7 +82,8 @@
                 ,expired_date
                 ,verified_date
                 ,is_delete
-
+                ,is_precreated
+                ,data_body
         from ticket_record where ticket_md5=#{ticketMd5Value};
 
     </select>

@@ -7,9 +7,11 @@ import com.hummer.common.exceptions.AppException;
 import com.hummer.common.http.HttpAsyncClient;
 import com.hummer.common.http.RequestCustomConfig;
 import com.hummer.rest.model.ResourceResponse;
+import com.jiappo.open.api.domain.eventbus.VerifiedSecretEvent;
 import com.jiappo.open.api.domain.eventbus.VerifiedSignEvent;
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;
 import com.jiappo.open.api.support.model.po.MessageRulePo;
+import com.jiappo.open.api.support.model.po.MessageTicketRecordPo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,8 @@ public abstract class BaseInMessageHandleService implements InMessageHandle {
     private final static Logger LOGGER = LoggerFactory.getLogger(BaseInMessageHandleService.class);
     @Autowired
     private EventBus eventBus;
-
+    @Autowired
+    private MessageTicketService ticketService;
     /**
      * impl general verified logic
      *
@@ -46,21 +49,21 @@ public abstract class BaseInMessageHandleService implements InMessageHandle {
         //verified secret key
         try {
             verifiedSecretKey(inMessageReq.getPlatformName(), inMessageReq.getSecretKey(), po.getSecretKey());
-            eventBus.post(VerifiedSignEvent
-                    .success(inMessageReq,"secret"));
+            eventBus.post(VerifiedSecretEvent
+                    .success(inMessageReq));
         } catch (Throwable throwable) {
-            eventBus.post(VerifiedSignEvent
-                    .failed(inMessageReq,throwable,"secret"));
+            eventBus.post(VerifiedSecretEvent
+                    .failed(inMessageReq,throwable));
             throw throwable;
         }
         //verified request body sign data
         try {
             verifiedSign(inMessageReq, po);
             eventBus.post(VerifiedSignEvent
-                    .success(inMessageReq,"sign"));
+                    .success(inMessageReq));
         } catch (Throwable throwable) {
             eventBus.post(VerifiedSignEvent
-                    .failed(inMessageReq,throwable,"sign"));
+                    .failed(inMessageReq,throwable));
             throw throwable;
         }
     }
@@ -136,12 +139,19 @@ public abstract class BaseInMessageHandleService implements InMessageHandle {
     @Override
     @SuppressWarnings("unchecked")
     public Object transfer(MessageRulePo po, InMessageReq req) {
+        //if use snapshot data then return ticket record data body
+        if(po.getInMessageResponseSnapshotData()){
+            MessageTicketRecordPo ticketRecordPo = ticketService.queryTicket(req.getSign());
+            return ticketRecordPo.getDataBody();
+        }
+
         if (Strings.isNullOrEmpty(po.getTargetHttpApi())) {
             LOGGER.warn("platform {} message  type {} no settings target url,can not send message"
                     , req.getPlatformName()
                     , req.getMessageType());
             return null;
         }
+
         RequestCustomConfig config = RequestCustomConfig.builder()
                 .setMethod(RequestMethod.POST)
                 .setRequestBody(req.getData())

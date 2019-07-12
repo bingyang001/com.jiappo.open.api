@@ -16,10 +16,10 @@ import java.sql.SQLException;
  * @since:1.0.0
  * @Date: 2019/7/9 15:15
  **/
-public class JsonHandle<T> extends BaseTypeHandler<T> {
+public class JsonSimpleHandle<T> extends BaseTypeHandler<T> {
     private Class<T> aClass;
 
-    public JsonHandle(Class<T> tClass) {
+    public JsonSimpleHandle(Class<T> tClass) {
         this.aClass = tClass;
     }
 

@@ -34,4 +34,5 @@ public class MessageRulePo {
     private Map<String,Object> ticketField;
     private Integer ticketExpiredTimeMinute;
     private Boolean isPreCreated;
+    private Boolean inMessageResponseSnapshotData;
 }

@@ -7,68 +7,40 @@ import com.jiappo.open.api.support.model.dto.in.InMessageReq;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.Date;
 
 /**
  * @Author: lee
  * @since:1.0.0
- * @Date: 2019/7/10 15:00
+ * @Date: 2019/7/12 14:41
  **/
-@Data
 @Builder
-public class VerifiedSignEvent extends VerifiedTicketEvent {
+@Data
+public class VerifiedSecretEvent {
     private String platformName;
     private String messageType;
     private String messageId;
     private String secretKey;
     private Integer verifiedStatus;
-    private String verifiedType;
-    @Builder.Default
-    private Date verifiedDate = new Date();
     private String verifiedDescribe;
     private Throwable throwable;
     private String originTicket;
-    private Integer recordId;
 
-    /**
-     * verified success
-     *
-     * @param req          req message
-     * @param verifiedType verified type value secret or sign
-     * @return com.jiappo.open.api.domain.eventbus.VerifiedSignEvent
-     * @author liguo
-     * @date 2019/7/10 15:43
-     * @since 1.0.0
-     **/
-    public static VerifiedSignEvent success(final InMessageReq req) {
-        return VerifiedSignEvent
+    public static VerifiedSecretEvent success(final InMessageReq req) {
+        return VerifiedSecretEvent
                 .builder()
                 .verifiedStatus(VerifiedStatusEnum.VERIFIED_SUCCESS.getCode())
                 .verifiedDescribe("ok")
-                .verifiedType("sign")
                 .platformName(req.getPlatformName())
                 .messageType(req.getMessageType())
-                .verifiedDate(new Date())
                 .secretKey(req.getSecretKey())
                 .messageId(req.getBatchId())
                 .originTicket(req.getSign())
                 .build();
     }
 
-    /**
-     * verified failed
-     *
-     * @param req          req message
-     * @param throwable    exception
-     * @param verifiedType verified type value secret or sign
-     * @return com.jiappo.open.api.domain.eventbus.VerifiedSignEvent
-     * @author liguo
-     * @date 2019/7/10 15:44
-     * @since 1.0.0
-     **/
-    public static VerifiedSignEvent failed(final InMessageReq req
-            , final Throwable throwable) {
 
+    public static VerifiedSecretEvent failed(final InMessageReq req
+            , final Throwable throwable) {
         int errorCode = VerifiedStatusEnum.VERIFIED_FAILED.getCode();
         String errorMessage;
         if (throwable instanceof SignAuthException) {
@@ -81,17 +53,17 @@ public class VerifiedSignEvent extends VerifiedTicketEvent {
             errorMessage = throwable.toString();
         }
 
-        return VerifiedSignEvent
+        return VerifiedSecretEvent
                 .builder()
                 .verifiedStatus(errorCode)
                 .verifiedDescribe(errorMessage)
-                .verifiedType("sign")
                 .platformName(req.getPlatformName())
                 .messageType(req.getMessageType())
-                .verifiedDate(new Date())
                 .secretKey(req.getSecretKey())
                 .messageId(req.getBatchId())
                 .originTicket(req.getSign())
                 .build();
     }
+
+
 }

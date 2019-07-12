@@ -31,7 +31,7 @@ public class RsaMessageTicketDefault extends BaseMessageTicket {
 
     @Override
     public void decrypt(InMessageReq inMessageReq, TicketFieldBo po) {
-        String decrypt = Rsa.decrypt(inMessageReq.getSign(), po.getPrivateKey());
+        String decrypt =new  Rsa(po.getPublicKey(),po.getPrivateKey()).decryptByPriavte(inMessageReq.getSign());
         if (Strings.isNullOrEmpty(decrypt)) {
             LOGGER.error("platform {} message type {} rsa decrypt failed", inMessageReq.getPlatformName()
                     , inMessageReq.getMessageType());
@@ -51,7 +51,7 @@ public class RsaMessageTicketDefault extends BaseMessageTicket {
                 , true
                 , true);
         String originVal = JSON.toJSONString(fieldMap);
-        String val = Rsa.encrypted(originVal, po.getPublicKey());
+        String val = new Rsa(po.getPublicKey(),po.getPrivateKey()).encryptByPublish(originVal);
         LOGGER.info("platform {} message type {} rsa encrypted done,origin value {} ,encrypted value {}"
                 , inMessageReq.getPlatformName()
                 , inMessageReq.getMessageType()

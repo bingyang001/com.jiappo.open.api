@@ -2,7 +2,9 @@ package com.jiappo.open.api.support.model.po;
 
 import lombok.Data;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @Author: lee
@@ -26,4 +28,5 @@ public class MessageTicketRecordPo {
     private String ticketMd5;
     private Boolean isDelete;
     private Boolean isPreCreated;
+    private Collection<Map<String,Object>> dataBody;
 }

@@ -1,6 +1,7 @@
 package com.jiappo.open.api.application.facade;
 
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;
+import com.jiappo.open.api.support.model.dto.out.OutMessageReq;
 
 /**
  * @Author: lee
@@ -29,4 +30,15 @@ public interface MessageFacade {
      * @since 1.0.0
      **/
     String newTicket(InMessageReq req);
+
+    /**
+     * out message
+     *
+     * @param req req
+     * @return java.lang.Object
+     * @author liguo
+     * @date 2019/7/12 17:10
+     * @since 1.0.0
+     **/
+    Object outMessage(OutMessageReq req);
 }

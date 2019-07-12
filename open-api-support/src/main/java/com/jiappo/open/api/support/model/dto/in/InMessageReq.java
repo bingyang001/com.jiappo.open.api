@@ -22,25 +22,7 @@ import java.util.Map;
 @ApiModel(description = "all in site message.")
 public class InMessageReq extends BaseOpenApiRequest {
     private static final long serialVersionUID = -1184824199882253607L;
-    /***
-     * out of service platform name
-     **/
-    @ApiModelProperty(hidden = true)
-    private String platformName;
-    /**
-     * message body
-     */
-    @ApiModelProperty(value = "backup filed")
-    private Collection<Map<String, Object>> data;
-    /**
-     * message batch id,need unique
-     **/
-    private String batchId;
-    /***
-     * message type . ie: create order,create user
-     **/
-    @ApiModelProperty(value = "message business type", hidden = true)
-    private String messageType;
+
     /**
      * body sign
      **/

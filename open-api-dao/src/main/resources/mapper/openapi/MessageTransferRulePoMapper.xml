@@ -17,7 +17,7 @@
     <result column="ticket_impl_service" property="ticketImplService" jdbcType="VARCHAR"/>
     <result column="route_impl_service" property="routeImplService" jdbcType="VARCHAR"/>
     <result column="ticket_field_map" property="ticketField" javaType="java.util.Map"
-            typeHandler="com.jiappo.open.api.support.mybatis.JsonHandle"/>
+            typeHandler="com.jiappo.open.api.support.mybatis.JsonSimpleHandle"/>
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="last_modified_time" property="lastModifiedTime" jdbcType="TIMESTAMP" />
     <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
@@ -25,6 +25,7 @@
     <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
     <result column="ticket_expired_time_minute" property="ticketExpiredTimeMinute" javaType="INTEGER"/>
     <result column="is_pre_created" property="isPreCreated" jdbcType="VARCHAR" />
+    <result column="in_message_response_snapshot_data" property="inMessageResponseSnapshotData" jdbcType="BIT"/>
   </resultMap>
 
   <select id="queryRouteSingleBy" resultMap="BaseResultMap">
@@ -50,7 +51,8 @@
       last_modified_time,
       is_deleted,
       ticket_expired_time_minute,
-      is_pre_created
+      is_pre_created,
+      in_message_response_snapshot_data
     FROM
       message_rule
     WHERE platform_name=#{platformName}
