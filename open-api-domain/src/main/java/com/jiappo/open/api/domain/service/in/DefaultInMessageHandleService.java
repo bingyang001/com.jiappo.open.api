@@ -1,8 +1,8 @@
-package com.jiappo.open.api.domain.service;
+package com.jiappo.open.api.domain.service.in;
 
 import com.google.common.base.Strings;
-import com.hummer.common.exceptions.AppException;
 import com.jiappo.open.api.domain.exception.SecretKeyAuthException;
+import com.jiappo.open.api.domain.service.ErrorConstant;
 import com.jiappo.open.api.domain.ticket.MessageSignFactory;
 import com.jiappo.open.api.support.model.bo.TicketFieldBo;
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;

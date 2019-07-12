@@ -54,7 +54,7 @@
       is_pre_created,
       in_message_response_snapshot_data
     FROM
-      message_rule
+      in_message_rule
     WHERE platform_name=#{platformName}
       AND message_type=#{messageType}
       AND message_route_type=#{messageRouteType}

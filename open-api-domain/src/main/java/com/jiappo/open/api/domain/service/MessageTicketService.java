@@ -68,7 +68,7 @@ public class MessageTicketService {
 
         //
         try {
-            MessageTicketRecordPo recordPo=new MessageTicketRecordPo();
+            MessageTicketRecordPo recordPo = new MessageTicketRecordPo();
             recordPo.setIsPreCreated(true);
             recordPo.setPlatformName(req.getPlatformName());
             recordPo.setExpiredDate(po.getTicketExpiredTimeMinute());
@@ -77,7 +77,9 @@ public class MessageTicketService {
             recordPo.setTicketValue(ticket);
             recordPo.setTicketMd5(Md5.encryptMd5(ticket));
             recordPo.setTicketType(po.getTicketImplService());
-            recordPo.setDataBody(req.getData());
+            if (po.getInMessageResponseSnapshotData()) {
+                recordPo.setDataBody(req.getData());
+            }
             int dbResult = ticketPoMapper.saveTicket(recordPo);
             LOGGER.info("platformName {} message type {} ticket created success,save to db success {}"
                     , req.getPlatformName()

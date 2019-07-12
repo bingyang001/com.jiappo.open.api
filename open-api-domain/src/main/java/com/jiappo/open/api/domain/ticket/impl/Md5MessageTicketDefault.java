@@ -2,29 +2,17 @@ package com.jiappo.open.api.domain.ticket.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.hummer.common.security.Md5;
-import com.hummer.common.utils.DateUtil;
 import com.jiappo.open.api.domain.exception.SignAuthException;
-import com.jiappo.open.api.domain.service.MessageTicketService;
 import com.jiappo.open.api.domain.ticket.BaseMessageTicket;
-import com.jiappo.open.api.domain.ticket.VerifiedStatusEnum;
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;
 import com.jiappo.open.api.support.model.bo.TicketFieldBo;
-import com.jiappo.open.api.support.model.po.MessageTicketRecordPo;
 import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.Map;
 
-import static com.jiappo.open.api.domain.service.ErrorConstant.SignError.SIGN_STRING_ALREADY_EXPIRED;
-import static com.jiappo.open.api.domain.service.ErrorConstant.SignError.SIGN_STRING_ALREADY_USED;
-import static com.jiappo.open.api.domain.service.ErrorConstant.SignError.SIGN_STRING_ALREAD_EXPIRED_DOC;
-import static com.jiappo.open.api.domain.service.ErrorConstant.SignError.SIGN_STRING_ALREAD_USED_DOC;
-import static com.jiappo.open.api.domain.service.ErrorConstant.SignError.SIGN_STRING_NO_EXISTS;
-import static com.jiappo.open.api.domain.service.ErrorConstant.SignError.SIGN_STRING_NO_EXISTS_DOC;
 import static com.jiappo.open.api.domain.service.ErrorConstant.SignError.SIGN_STRING_NULL;
 import static com.jiappo.open.api.domain.service.ErrorConstant.SignError.SIGN_STRING_NULL_DOC;
 import static com.jiappo.open.api.domain.service.ErrorConstant.SignError.SIGN_VERIFIED_FAILED;

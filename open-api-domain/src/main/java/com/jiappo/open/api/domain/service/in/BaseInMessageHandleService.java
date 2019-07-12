@@ -1,4 +1,4 @@
-package com.jiappo.open.api.domain.service;
+package com.jiappo.open.api.domain.service.in;
 
 import com.alibaba.fastjson.TypeReference;
 import com.google.common.base.Strings;
@@ -9,6 +9,9 @@ import com.hummer.common.http.RequestCustomConfig;
 import com.hummer.rest.model.ResourceResponse;
 import com.jiappo.open.api.domain.eventbus.VerifiedSecretEvent;
 import com.jiappo.open.api.domain.eventbus.VerifiedSignEvent;
+import com.jiappo.open.api.domain.service.ErrorConstant;
+import com.jiappo.open.api.domain.service.InMessageHandle;
+import com.jiappo.open.api.domain.service.MessageTicketService;
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;
 import com.jiappo.open.api.support.model.po.MessageRulePo;
 import com.jiappo.open.api.support.model.po.MessageTicketRecordPo;
