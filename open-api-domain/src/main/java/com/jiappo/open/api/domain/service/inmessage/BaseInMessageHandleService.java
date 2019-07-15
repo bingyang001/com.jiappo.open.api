@@ -1,4 +1,4 @@
-package com.jiappo.open.api.domain.service.in;
+package com.jiappo.open.api.domain.service.inmessage;
 
 import com.alibaba.fastjson.TypeReference;
 import com.google.common.base.Strings;
@@ -15,7 +15,6 @@ import com.jiappo.open.api.domain.service.ErrorConstant;
 import com.jiappo.open.api.domain.service.InMessageHandle;
 import com.jiappo.open.api.domain.service.MessageTicketService;
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;
-import com.jiappo.open.api.support.model.po.MessageRulePo;
 import com.jiappo.open.api.support.model.po.MessageTicketRecordPo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.jiappo.open.api.domain.service.in;
+package com.jiappo.open.api.domain.service.inmessage;
 
 import com.google.common.base.Strings;
 import com.jiappo.open.api.domain.entity.InMessageRule;
