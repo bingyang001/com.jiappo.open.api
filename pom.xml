@@ -109,6 +109,11 @@
             </dependency>
             <dependency>
                 <groupId>com.jiappo</groupId>
+                <artifactId>open-api-facade</artifactId>
+                <version>${open.api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jiappo</groupId>
                 <artifactId>open-api</artifactId>
                 <version>${open.api.version}</version>
             </dependency>

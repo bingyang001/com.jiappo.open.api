@@ -35,4 +35,5 @@ public class MessageRulePo {
     private Integer ticketExpiredTimeMinute;
     private Boolean isPreCreated;
     private Boolean inMessageResponseSnapshotData;
+    private String targetPlatformName;
 }

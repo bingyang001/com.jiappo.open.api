@@ -1,4 +1,4 @@
-package com.jiappo.open.api.application.facade;
+package com.jiappo.open.api.facade;
 
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;
 import com.jiappo.open.api.support.model.dto.out.OutMessageReq;

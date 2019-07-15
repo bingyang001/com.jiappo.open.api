@@ -105,6 +105,7 @@ public class MessageTicketService {
      * @since 1.0.0
      **/
     public MessageTicketRecordPo queryTicket(String ticket) {
+        //cache MessageTicketRecordPo
         return ticketPoMapper.querySingleTicket(Md5.encryptMd5(ticket));
     }
 

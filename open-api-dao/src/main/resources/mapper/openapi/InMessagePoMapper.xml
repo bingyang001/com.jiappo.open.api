@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiappo.open.api.dao.mapper.openapi.InMessagePoMapper" >
+  <resultMap id="BaseResultMap" type="com.jiappo.open.api.support.model.po.InMessagePo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="platform_name" property="platformName" jdbcType="VARCHAR" />
+    <result column="message_type" property="messageType" jdbcType="VARCHAR" />
+    <result column="message_id" property="messageId" jdbcType="VARCHAR" />
+    <result column="message_body" property="messageBody"/>
+    <result column="sign" property="sign" jdbcType="VARCHAR"/>
+    <result column="secret_key" property="secretKey" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDateTime" jdbcType="TIMESTAMP"/>
+    <result column="inner_service_http_api" property="innerServiceHttpApi" jdbcType="VARCHAR" />
+    <result column="inner_service_resp_code" property="innerServiceRespCode" jdbcType="INTEGER"/>
+    <result column="inner_service_resp_message" property="innerServiceRespMessage" jdbcType="VARCHAR"/>
+  </resultMap>
+
+      <insert id="save"
+              parameterType="com.jiappo.open.api.support.model.po.InMessagePo"
+              useGeneratedKeys="true"
+              keyProperty="id">
+        insert into in_message (
+                                             platform_name
+                                            ,message_type
+                                            ,message_id
+                                            ,message_body
+                                            ,sign
+                                            ,secret_key
+                                            ,inner_service_http_api
+                                            ,inner_service_resp_code
+                                            ,inner_service_resp_message) values
+                                    (#{inMessagePo.platformName}
+                                    ,#{inMessagePo.messageType}
+                                    ,#{inMessagePo.messageId}
+                                    ,#{inMessagePo.messageBody}
+                                    ,#{inMessagePo.sign}
+                                    ,#{inMessagePo.secretKey}
+                                    ,#{inMessagePo.innerServiceHttpApi}
+                                    ,#{inMessagePo.innerServiceRespCode}
+                                    ,#{inMessagePo.innerServiceRespMessage})
+      </insert>
+
+
+</mapper>

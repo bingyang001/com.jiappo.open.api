@@ -1,12 +1,12 @@
 package com.jiappo.open.api.domain.service.in;
 
 import com.google.common.base.Strings;
+import com.jiappo.open.api.domain.entity.InMessageRule;
 import com.jiappo.open.api.domain.exception.SecretKeyAuthException;
 import com.jiappo.open.api.domain.service.ErrorConstant;
 import com.jiappo.open.api.domain.ticket.MessageSignFactory;
 import com.jiappo.open.api.support.model.bo.TicketFieldBo;
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;
-import com.jiappo.open.api.support.model.po.MessageRulePo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -55,7 +55,7 @@ public class DefaultInMessageHandleService extends BaseInMessageHandleService {
      * @since 1.0.0
      **/
     @Override
-    protected void verifiedSign(InMessageReq inMessageReq, MessageRulePo po) {
+    protected void verifiedSign(InMessageReq inMessageReq, InMessageRule po) {
 
         TicketFieldBo ticketFieldBo = TicketFieldBo
                 .builder()
@@ -63,7 +63,7 @@ public class DefaultInMessageHandleService extends BaseInMessageHandleService {
                 .privateKey(po.getPrivateKey())
                 .publicKey(po.getPublicKey())
                 .useOneExpired(true)
-                .fieldMap(po.getTicketField())
+                .fieldMap(po.getTicketFieldMap())
                 .isPreCreated(po.getIsPreCreated())
                 .build();
         MessageSignFactory

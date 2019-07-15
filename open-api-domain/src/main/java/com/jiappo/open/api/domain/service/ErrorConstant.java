@@ -28,7 +28,7 @@ public class ErrorConstant {
         public static final String NO_ACTIVATE_ERROR_DOC = "api no activate";
 
         public static final int ALREADY_EXPIRED_ERROR = 40005;
-        public static final String AUTHORIZE_ALREADY_EXPIRED_DOC = "api authorize already expired";
+        public static final String AUTHORIZE_ALREADY_EXPIRED_DOC = "api message authorize already expired";
 
         public static final int SECRET_KEY_NO_MATCH_ERROR = 40006;
         public static final String SECRET_KEY_NO_MATCH_ERROR_DOC = "SecretKey error";

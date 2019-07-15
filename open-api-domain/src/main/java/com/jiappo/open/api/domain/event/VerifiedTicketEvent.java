@@ -1,4 +1,4 @@
-package com.jiappo.open.api.domain.eventbus;
+package com.jiappo.open.api.domain.event;
 
 /**
  * @Author: lee

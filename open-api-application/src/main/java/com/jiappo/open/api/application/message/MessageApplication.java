@@ -1,8 +1,9 @@
-package com.jiappo.open.api.application.impl;
+package com.jiappo.open.api.application.message;
 
 import com.hummer.common.exceptions.AppException;
-import com.jiappo.open.api.application.facade.MessageFacade;
+import com.jiappo.open.api.facade.MessageFacade;
 import com.jiappo.open.api.dao.mapper.openapi.MessageTransferRulePoMapper;
+import com.jiappo.open.api.domain.entity.InMessageRule;
 import com.jiappo.open.api.domain.entity.OutMessageRule;
 import com.jiappo.open.api.domain.service.in.BaseInMessageHandleService;
 import com.jiappo.open.api.domain.service.out.BaseOutMessageHandleService;
@@ -11,6 +12,7 @@ import com.jiappo.open.api.domain.service.MessageTicketService;
 import com.jiappo.open.api.support.model.dto.in.InMessageReq;
 import com.jiappo.open.api.support.model.dto.out.OutMessageReq;
 import com.jiappo.open.api.support.model.po.MessageRulePo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ import java.util.Map;
  * @Date: 2019/6/28 15:14
  **/
 @Service
+@Slf4j
 public class MessageApplication implements MessageFacade {
     @Autowired
     private MessageTransferRulePoMapper routeMapper;
@@ -36,6 +39,7 @@ public class MessageApplication implements MessageFacade {
 
     @Override
     public Object inMessage(InMessageReq req) {
+        log.info("begin handle in message {}", req);
         MessageRulePo po = routeMapper.queryRouteSingleBy(req.getPlatformName()
                 , req.getMessageType(), 0);
         if (po == null) {
@@ -46,10 +50,11 @@ public class MessageApplication implements MessageFacade {
         if (inMessageHandle == null) {
             throw new AppException(40001, "no match route provide service");
         }
+        InMessageRule  inMessageRule=new InMessageRule(po);
         //verified
-        inMessageHandle.verified(req, po);
+        inMessageHandle.verified(req, inMessageRule);
         //send message
-        return inMessageHandle.transfer(po, req);
+        return inMessageHandle.transfer(inMessageRule, req);
     }
 
     /**
@@ -63,6 +68,7 @@ public class MessageApplication implements MessageFacade {
      **/
     @Override
     public String newTicket(InMessageReq req) {
+        log.info("new ticket request body is {}", req);
         MessageRulePo po = routeMapper.queryRouteSingleBy(req.getPlatformName()
                 , req.getMessageType(), 0);
         if (po == null) {
@@ -82,6 +88,7 @@ public class MessageApplication implements MessageFacade {
      **/
     @Override
     public Object outMessage(OutMessageReq req) {
+        log.info("out message request is {}", req);
         //query message rule
         MessageRulePo po = routeMapper.queryRouteSingleBy(req.getPlatformName()
                 , req.getMessageType(), 1);

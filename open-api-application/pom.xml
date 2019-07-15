@@ -30,5 +30,9 @@
             <groupId>com.jiappo</groupId>
             <artifactId>open-api-dao</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.jiappo</groupId>
+            <artifactId>open-api-facade</artifactId>
+        </dependency>
     </dependencies>
 </project>

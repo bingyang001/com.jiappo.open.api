@@ -26,6 +26,7 @@
     <result column="ticket_expired_time_minute" property="ticketExpiredTimeMinute" javaType="INTEGER"/>
     <result column="is_pre_created" property="isPreCreated" jdbcType="VARCHAR" />
     <result column="in_message_response_snapshot_data" property="inMessageResponseSnapshotData" jdbcType="BIT"/>
+    <result column="target_platform_name" property="targetPlatformName" jdbcType="VARCHAR"/>
   </resultMap>
 
   <select id="queryRouteSingleBy" resultMap="BaseResultMap">
@@ -33,6 +34,7 @@
       id,
       platform_name,
       message_type,
+      target_platform_name,
       target_http_api,
       target_http_method,
       call_target_timeout_millisecond,
@@ -54,7 +56,7 @@
       is_pre_created,
       in_message_response_snapshot_data
     FROM
-      in_message_rule
+      message_rule
     WHERE platform_name=#{platformName}
       AND message_type=#{messageType}
       AND message_route_type=#{messageRouteType}

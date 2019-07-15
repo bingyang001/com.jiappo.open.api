@@ -3,8 +3,10 @@ package com.jiappo.open.api.domain.service;
 import com.jiappo.open.api.domain.entity.OutMessageRule;
 import com.jiappo.open.api.support.model.dto.out.OutMessageReq;
 import org.apache.http.Header;
+import org.apache.http.NameValuePair;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @Author: lee
@@ -34,7 +36,7 @@ public interface OutMessageHandle {
      * @date 2019/7/12 18:08
      * @since 1.0.0
      **/
-    String builderBody(final OutMessageReq req, final OutMessageRule rule);
+    Object builderBody(final OutMessageReq req, final OutMessageRule rule);
 
     /**
      * builder target url

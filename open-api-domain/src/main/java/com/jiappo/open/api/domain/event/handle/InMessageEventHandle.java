@@ -1,13 +1,18 @@
-package com.jiappo.open.api.domain.eventbus;
+package com.jiappo.open.api.domain.event.handle;
 
 import com.google.common.eventbus.Subscribe;
 import com.hummer.common.utils.DateUtil;
+import com.hummer.common.utils.ObjectCopyUtils;
+import com.jiappo.open.api.domain.event.InMessageEvent;
+import com.jiappo.open.api.domain.event.VerifiedSecretEvent;
+import com.jiappo.open.api.domain.event.VerifiedSignEvent;
+import com.jiappo.open.api.domain.service.InMessageService;
 import com.jiappo.open.api.domain.service.MessageTicketService;
 import com.jiappo.open.api.domain.ticket.VerifiedStatusEnum;
+import com.jiappo.open.api.support.model.po.InMessagePo;
 import com.jiappo.open.api.support.model.po.MessageTicketRecordPo;
 import com.jiappo.open.api.support.model.po.TicketVerifiedRecordPo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,20 +22,22 @@ import org.springframework.stereotype.Component;
  * @Date: 2019/7/10 14:55
  **/
 @Component
+@Slf4j
 public class InMessageEventHandle {
-    private static final Logger LOGGER = LoggerFactory.getLogger(InMessageEventHandle.class);
     @Autowired
     private MessageTicketService ticketService;
+    @Autowired
+    private InMessageService inMessageService;
 
     @Subscribe
-    public void verifiedSecretResultHande(VerifiedSecretEvent event){
+    public void verifiedSecretResultHande(final VerifiedSecretEvent event) {
         //save verified result
         TicketVerifiedRecordPo verifiedRecordPo = new TicketVerifiedRecordPo();
         verifiedRecordPo.setVerifiedStatus(event.getVerifiedStatus());
         verifiedRecordPo.setVerifiedDescribe(event.getVerifiedDescribe());
         verifiedRecordPo.setPlatformName(event.getPlatformName());
         verifiedRecordPo.setMessageId(event.getMessageId());
-        verifiedRecordPo.setMessageType(event.getMessageId());
+        verifiedRecordPo.setMessageType(event.getMessageType());
         verifiedRecordPo.setSecretKey(event.getSecretKey());
         verifiedRecordPo.setTicketValue(event.getOriginTicket());
         verifiedRecordPo.setTicketType("secret");
@@ -38,8 +45,8 @@ public class InMessageEventHandle {
     }
 
     @Subscribe
-    public void verifiedResulthandle(VerifiedSignEvent event) {
-        LOGGER.info("begin handle verified event {}", event);
+    public void verifiedResulthandle(final VerifiedSignEvent event) {
+        log.info("begin handle verified event {}", event);
         MessageTicketRecordPo ticketRecordPo = ticketService.queryTicket(event.getOriginTicket());
         //update ticket record verified status
         if (ticketRecordPo != null && VerifiedStatusEnum.getByCode(event.getVerifiedStatus())
@@ -58,9 +65,14 @@ public class InMessageEventHandle {
         verifiedRecordPo.setVerifiedDescribe(event.getVerifiedDescribe());
         verifiedRecordPo.setPlatformName(event.getPlatformName());
         verifiedRecordPo.setMessageId(event.getMessageId());
-        verifiedRecordPo.setMessageType(event.getMessageId());
+        verifiedRecordPo.setMessageType(event.getMessageType());
         verifiedRecordPo.setTicketType(event.getVerifiedType());
         verifiedRecordPo.setSecretKey(event.getSecretKey());
         ticketService.saveNewTicketVerifiedResult(verifiedRecordPo);
+    }
+
+    @Subscribe
+    public void appendInMessageLog(final InMessageEvent event) {
+        inMessageService.save(ObjectCopyUtils.copy(event, InMessagePo.class));
     }
 }

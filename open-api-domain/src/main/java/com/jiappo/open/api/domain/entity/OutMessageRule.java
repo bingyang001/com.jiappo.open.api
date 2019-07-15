@@ -7,6 +7,8 @@ import lombok.Getter;
 import java.util.Map;
 
 /**
+ * send to out platform message rule.
+ *
  * @Author: lee
  * @since:1.0.0
  * @Date: 2019/7/12 15:18
@@ -24,6 +26,7 @@ public class OutMessageRule {
     private String privateKey;
     private Map<String, Object> ticketField;
     private String ticketImplService;
+    private String targetPlatformName;
 
     /**
      * builder out message rule
@@ -40,18 +43,18 @@ public class OutMessageRule {
             throw new AppException(40000, "rule not exists");
         }
 
-        OutMessageRule rule = new OutMessageRule();
-        rule.platformName = rulePo.getPlatformName();
-        rule.messageType = rulePo.getMessageType();
-        rule.targetHttpApi = rulePo.getTargetHttpApi();
-        rule.targetHttpApi = rulePo.getTargetHttpApi();
-        rule.targetHttpMethod = rulePo.getTargetHttpMethod();
-        rule.callTargetTimeoutMillisecond = rulePo.getCallTargetTimeoutMillisecond();
-        rule.secretKey = rulePo.getSecretKey();
-        rule.publicKey = rulePo.getPublicKey();
-        rule.privateKey = rulePo.getPrivateKey();
-        rule.ticketField = rulePo.getTicketField();
-        rule.ticketImplService = rulePo.getTicketImplService();
+        this.platformName = rulePo.getPlatformName();
+        this.messageType = rulePo.getMessageType();
+        this.targetHttpApi = rulePo.getTargetHttpApi();
+        this.targetHttpApi = rulePo.getTargetHttpApi();
+        this.targetHttpMethod = rulePo.getTargetHttpMethod();
+        this.callTargetTimeoutMillisecond = rulePo.getCallTargetTimeoutMillisecond();
+        this.secretKey = rulePo.getSecretKey();
+        this.publicKey = rulePo.getPublicKey();
+        this.privateKey = rulePo.getPrivateKey();
+        this.ticketField = rulePo.getTicketField();
+        this.ticketImplService = rulePo.getTicketImplService();
+        this.targetPlatformName = rulePo.getTargetPlatformName();
     }
 
     private OutMessageRule() {
