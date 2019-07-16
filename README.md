@@ -1,8 +1,8 @@
-# The Hummer-framework Project
+# The com.jiappo.open.api Project
 
 ## About
 
-Describe your project here.
+this is business General  open-api , provide other platform message Ability to interact
 
 ## Technical Stack
 
@@ -10,24 +10,27 @@ Describe your project here.
 - Maven 3.5+
 - Spring boot 2.1.0.RELEASE+
 - Lombok abstraction
-- JPA with H2 for explanation
-- Swagger 2 API documentation
-- Spring retry and circuit breaker for external service call
-- REST API model validation 
-- Spring cloud config for external configuration on GIT REPO
-- Cucumber and Spring Boot test for integration test
-- Jenkins Pipeline for multi branch project
-- Continuous delivery and integration standards with Sonar check and release management
-- Support retry in sanity checks  
 
-## Installation
+## module
 
--  to run locally , you need to configure the run configuration by passing :
-1- VM parameter: -DLOG_PATH=../log
-2- Set SPRING profile to LOCAL 
+- open-api
+- open-api-application
+- open-api-dao
+- open-api-domain
+- open-api-integration
+- open-api-support
+- open-api-test
+- open-api-facade
 
 ## License
 
 This software is licensed under the [BSD License][BSD]. For more information, read the file [LICENSE](LICENSE).
 
 [BSD]: https://opensource.org/licenses/BSD-3-Clause
+
+## quick start
+
+- Windows
+  java -cp "%classpath%" -jar -Dspring.config.location=etc/ lib/open-api-1.0.0-SNAPSHOT.jar
+- linux
+  java -server -cp $classpath -jar -Dspring.config.location=etc/ lib/open-api-1.0.0-SNAPSHOT.jar 2>&1  &  
