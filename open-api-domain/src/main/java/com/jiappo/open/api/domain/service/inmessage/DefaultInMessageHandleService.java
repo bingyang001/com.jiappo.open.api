@@ -6,7 +6,7 @@ import com.jiappo.open.api.domain.exception.SecretKeyAuthException;
 import com.jiappo.open.api.domain.service.ErrorConstant;
 import com.jiappo.open.api.domain.ticket.MessageSignFactory;
 import com.jiappo.open.api.support.model.bo.TicketFieldBo;
-import com.jiappo.open.api.support.model.dto.in.InMessageReq;
+import com.jiappo.open.api.support.model.dto.inmessage.InMessageReq;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

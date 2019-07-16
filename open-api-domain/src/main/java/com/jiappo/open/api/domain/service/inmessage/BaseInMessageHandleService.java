@@ -14,7 +14,7 @@ import com.jiappo.open.api.domain.event.VerifiedSignEvent;
 import com.jiappo.open.api.domain.service.ErrorConstant;
 import com.jiappo.open.api.domain.service.InMessageHandle;
 import com.jiappo.open.api.domain.service.MessageTicketService;
-import com.jiappo.open.api.support.model.dto.in.InMessageReq;
+import com.jiappo.open.api.support.model.dto.inmessage.InMessageReq;
 import com.jiappo.open.api.support.model.po.MessageTicketRecordPo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

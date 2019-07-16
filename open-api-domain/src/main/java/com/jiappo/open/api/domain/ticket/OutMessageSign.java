@@ -1,6 +1,6 @@
 package com.jiappo.open.api.domain.ticket;
 
-import com.jiappo.open.api.support.model.dto.in.InMessageReq;
+import com.jiappo.open.api.support.model.dto.inmessage.InMessageReq;
 import com.jiappo.open.api.support.model.bo.TicketFieldBo;
 
 /**

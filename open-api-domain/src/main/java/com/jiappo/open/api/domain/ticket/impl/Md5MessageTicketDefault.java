@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.hummer.common.security.Md5;
 import com.jiappo.open.api.domain.exception.SignAuthException;
 import com.jiappo.open.api.domain.ticket.BaseMessageTicket;
-import com.jiappo.open.api.support.model.dto.in.InMessageReq;
+import com.jiappo.open.api.support.model.dto.inmessage.InMessageReq;
 import com.jiappo.open.api.support.model.bo.TicketFieldBo;
 import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;

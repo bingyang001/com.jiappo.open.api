@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.hummer.common.exceptions.SysException;
 import com.hummer.common.http.RequestCustomConfig;
 import com.jiappo.open.api.domain.entity.OutMessageRule;
-import com.jiappo.open.api.support.model.dto.out.OutMessageReq;
+import com.jiappo.open.api.support.model.dto.outmessage.OutMessageReq;
 import lombok.Builder;
 import lombok.Getter;
 

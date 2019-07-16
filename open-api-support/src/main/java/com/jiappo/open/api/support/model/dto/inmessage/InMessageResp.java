@@ -1,4 +1,4 @@
-package com.jiappo.open.api.support.model.dto.in;
+package com.jiappo.open.api.support.model.dto.inmessage;
 
 import com.jiappo.open.api.support.model.dto.BaseOpenApiResponse;
 import io.swagger.annotations.ApiModel;

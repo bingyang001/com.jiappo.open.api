@@ -3,7 +3,7 @@ package com.jiappo.open.api.controller;
 import com.hummer.rest.model.ResourceResponse;
 import com.hummer.rest.utils.ParameterAssertUtil;
 import com.jiappo.open.api.facade.MessageFacade;
-import com.jiappo.open.api.support.model.dto.out.OutMessageReq;
+import com.jiappo.open.api.support.model.dto.outmessage.OutMessageReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;

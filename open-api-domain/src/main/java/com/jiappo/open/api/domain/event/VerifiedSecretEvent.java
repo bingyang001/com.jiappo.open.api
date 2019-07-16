@@ -3,7 +3,7 @@ package com.jiappo.open.api.domain.event;
 import com.jiappo.open.api.domain.exception.SecretKeyAuthException;
 import com.jiappo.open.api.domain.exception.SignAuthException;
 import com.jiappo.open.api.domain.ticket.VerifiedStatusEnum;
-import com.jiappo.open.api.support.model.dto.in.InMessageReq;
+import com.jiappo.open.api.support.model.dto.inmessage.InMessageReq;
 import lombok.Builder;
 import lombok.Data;
 

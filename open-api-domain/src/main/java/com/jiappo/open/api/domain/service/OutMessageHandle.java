@@ -1,12 +1,10 @@
 package com.jiappo.open.api.domain.service;
 
 import com.jiappo.open.api.domain.entity.OutMessageRule;
-import com.jiappo.open.api.support.model.dto.out.OutMessageReq;
+import com.jiappo.open.api.support.model.dto.outmessage.OutMessageReq;
 import org.apache.http.Header;
-import org.apache.http.NameValuePair;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * @Author: lee

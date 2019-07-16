@@ -1,4 +1,4 @@
-package com.jiappo.open.api.support.model.dto.in;
+package com.jiappo.open.api.support.model.dto.inmessage;
 
 import com.jiappo.open.api.support.model.dto.BaseOpenApiRequest;
 import io.swagger.annotations.ApiModel;
@@ -7,8 +7,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotEmpty;
-import java.util.Collection;
-import java.util.Map;
 
 /**
  * create user message

@@ -1,7 +1,7 @@
 package com.jiappo.open.api.domain.service.outmessage;
 
 import com.jiappo.open.api.domain.entity.OutMessageRule;
-import com.jiappo.open.api.support.model.dto.out.OutMessageReq;
+import com.jiappo.open.api.support.model.dto.outmessage.OutMessageReq;
 import org.apache.http.Header;
 import org.springframework.stereotype.Service;
 

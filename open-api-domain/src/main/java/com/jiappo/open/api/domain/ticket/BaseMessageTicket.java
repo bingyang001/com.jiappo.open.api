@@ -4,7 +4,7 @@ import com.google.common.collect.Maps;
 import com.hummer.common.utils.DateUtil;
 import com.jiappo.open.api.domain.exception.SignAuthException;
 import com.jiappo.open.api.domain.service.MessageTicketService;
-import com.jiappo.open.api.support.model.dto.in.InMessageReq;
+import com.jiappo.open.api.support.model.dto.inmessage.InMessageReq;
 import com.jiappo.open.api.support.model.bo.TicketFieldBo;
 import com.jiappo.open.api.support.model.po.MessageTicketRecordPo;
 import org.slf4j.Logger;

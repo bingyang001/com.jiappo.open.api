@@ -1,7 +1,7 @@
 package com.jiappo.open.api.facade;
 
-import com.jiappo.open.api.support.model.dto.in.InMessageReq;
-import com.jiappo.open.api.support.model.dto.out.OutMessageReq;
+import com.jiappo.open.api.support.model.dto.inmessage.InMessageReq;
+import com.jiappo.open.api.support.model.dto.outmessage.OutMessageReq;
 
 /**
  * @Author: lee

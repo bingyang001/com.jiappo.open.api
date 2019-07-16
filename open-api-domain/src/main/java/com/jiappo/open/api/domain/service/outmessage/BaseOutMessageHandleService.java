@@ -6,7 +6,7 @@ import com.hummer.common.http.RequestCustomConfig;
 import com.jiappo.open.api.domain.entity.OutMessageRule;
 import com.jiappo.open.api.domain.event.OutMessageEvent;
 import com.jiappo.open.api.domain.service.OutMessageHandle;
-import com.jiappo.open.api.support.model.dto.out.OutMessageReq;
+import com.jiappo.open.api.support.model.dto.outmessage.OutMessageReq;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

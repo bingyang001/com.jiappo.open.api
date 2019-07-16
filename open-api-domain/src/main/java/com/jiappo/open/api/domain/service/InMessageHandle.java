@@ -1,7 +1,7 @@
 package com.jiappo.open.api.domain.service;
 
 import com.jiappo.open.api.domain.entity.InMessageRule;
-import com.jiappo.open.api.support.model.dto.in.InMessageReq;
+import com.jiappo.open.api.support.model.dto.inmessage.InMessageReq;
 
 /**
  * @Author: lee

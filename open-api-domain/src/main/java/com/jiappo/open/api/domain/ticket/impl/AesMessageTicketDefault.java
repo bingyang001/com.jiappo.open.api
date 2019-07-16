@@ -5,7 +5,7 @@ import com.google.common.base.Strings;
 import com.hummer.common.security.Aes;
 import com.jiappo.open.api.domain.exception.SignAuthException;
 import com.jiappo.open.api.domain.ticket.BaseMessageTicket;
-import com.jiappo.open.api.support.model.dto.in.InMessageReq;
+import com.jiappo.open.api.support.model.dto.inmessage.InMessageReq;
 import com.jiappo.open.api.support.model.bo.TicketFieldBo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -7,7 +7,7 @@ import com.jiappo.open.api.dao.mapper.openapi.MessageTicketVerifiedResultPoMappe
 import com.jiappo.open.api.domain.ticket.BaseMessageTicket;
 import com.jiappo.open.api.support.model.bo.TicketFieldBo;
 import com.jiappo.open.api.support.model.bo.TicketVerifiedResultBo;
-import com.jiappo.open.api.support.model.dto.in.InMessageReq;
+import com.jiappo.open.api.support.model.dto.inmessage.InMessageReq;
 import com.jiappo.open.api.support.model.po.MessageRulePo;
 import com.jiappo.open.api.support.model.po.MessageTicketRecordPo;
 import com.jiappo.open.api.support.model.po.TicketVerifiedRecordPo;
