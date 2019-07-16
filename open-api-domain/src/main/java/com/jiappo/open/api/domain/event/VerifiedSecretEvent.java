@@ -16,7 +16,7 @@ import lombok.Data;
 @Builder
 @Data
 public class VerifiedSecretEvent {
-    private String platformName;
+    private String messageSource;
     private String messageType;
     private String messageId;
     private String secretKey;
@@ -30,10 +30,10 @@ public class VerifiedSecretEvent {
                 .builder()
                 .verifiedStatus(VerifiedStatusEnum.VERIFIED_SUCCESS.getCode())
                 .verifiedDescribe("ok")
-                .platformName(req.getPlatformName())
+                .messageSource(req.getMessageSource())
                 .messageType(req.getMessageType())
                 .secretKey(req.getSecretKey())
-                .messageId(req.getBatchId())
+                .messageId(req.getMessageId())
                 .originTicket(req.getSign())
                 .build();
     }
@@ -57,10 +57,10 @@ public class VerifiedSecretEvent {
                 .builder()
                 .verifiedStatus(errorCode)
                 .verifiedDescribe(errorMessage)
-                .platformName(req.getPlatformName())
+                .messageSource(req.getMessageSource())
                 .messageType(req.getMessageType())
                 .secretKey(req.getSecretKey())
-                .messageId(req.getBatchId())
+                .messageId(req.getMessageId())
                 .originTicket(req.getSign())
                 .build();
     }

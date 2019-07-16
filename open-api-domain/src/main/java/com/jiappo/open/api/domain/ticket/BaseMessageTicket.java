@@ -109,8 +109,12 @@ public abstract class BaseMessageTicket implements InMessageSign, OutMessageSign
 
         Date expiredTime = DateUtil.addMinute(ticketRecordPo.getCreatedDate(), ticketRecordPo.getExpiredDate());
         long diffMinute = DateUtil.subtractNowDate(expiredTime) / 1000 / 60;
-
-        if (diffMinute <= 0) {
+        LOGGER.info("message source {}, message type {}, message id {} sign after {} expired"
+                , inMessageReq.getMessageSource()
+                , inMessageReq.getMessageType()
+                , inMessageReq.getMessageId()
+                , expiredTime);
+        if (diffMinute < 0) {
             throw new SignAuthException(SIGN_STRING_ALREADY_EXPIRED, SIGN_STRING_ALREAD_EXPIRED_DOC);
         }
     }

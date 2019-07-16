@@ -40,7 +40,7 @@ public class InMessageController {
         //verify request body
         ParameterAssertUtil.assertRequestValidated(errors);
         //settings  platform name
-        req.setPlatformName(platform);
+        req.setMessageSource(platform);
         req.setMessageType(messageType);
         req.setSecretKey(secretKey);
         //call business

@@ -17,7 +17,7 @@ import java.util.Map;
 public class InMessageRule {
     private String messageSource;
     private String messageType;
-    private String targetPlatformName;
+    private String targetMessageSource;
     private String targetHttpApi;
     private String targetHttpMethod;
     private Integer callTargetTimeoutMillisecond;
@@ -35,9 +35,9 @@ public class InMessageRule {
 
 
     public InMessageRule(final MessageRulePo rulePo) {
-        this.messageSource = rulePo.getPlatformName();
+        this.messageSource = rulePo.getMessageSource();
         this.messageType = rulePo.getMessageType();
-        this.targetPlatformName = rulePo.getTargetPlatformName();
+        this.targetMessageSource = rulePo.getTargetMessageSource();
         this.targetHttpApi = rulePo.getTargetHttpApi();
         this.targetHttpMethod = rulePo.getTargetHttpMethod();
         this.callTargetTimeoutMillisecond = rulePo.getCallTargetTimeoutMillisecond();

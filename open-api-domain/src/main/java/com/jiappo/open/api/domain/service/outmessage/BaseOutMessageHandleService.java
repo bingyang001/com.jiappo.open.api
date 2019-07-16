@@ -1,16 +1,21 @@
 package com.jiappo.open.api.domain.service.outmessage;
 
 import com.google.common.eventbus.EventBus;
+import com.hummer.common.exceptions.AppException;
 import com.hummer.common.http.HttpAsyncClient;
 import com.hummer.common.http.RequestCustomConfig;
 import com.jiappo.open.api.domain.entity.OutMessageRule;
 import com.jiappo.open.api.domain.event.OutMessageEvent;
 import com.jiappo.open.api.domain.service.OutMessageHandle;
 import com.jiappo.open.api.support.model.dto.outmessage.OutMessageReq;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.http.NameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
 
 /**
  * send to out of platform the message logic handle template
@@ -45,6 +50,11 @@ public abstract class BaseOutMessageHandleService implements OutMessageHandle {
         final String postForm = "postform";
         boolean isPostForm = postForm.equalsIgnoreCase(rule.getTargetHttpMethod());
         String localMethod = isPostForm ? "post" : rule.getTargetHttpMethod();
+        List<NameValuePair> formBody = builderFormBody(req, rule);
+        if (isPostForm && CollectionUtils.isEmpty(formBody)) {
+            throw new AppException(40000
+                    , "rule is post form but from body data is empty,please implement builderFormBody method logic");
+        }
 
         RequestCustomConfig config = RequestCustomConfig.builder()
                 .setRequestBody(builderBody(req, rule))
@@ -52,6 +62,8 @@ public abstract class BaseOutMessageHandleService implements OutMessageHandle {
                 .setHeaders(builderHeader(req, rule))
                 .setMethod(RequestMethod.valueOf(localMethod.toUpperCase()))
                 .setUrl(builderUrl(req, rule))
+                .setPostFormBody(isPostForm)
+                .setFormData(builderFormBody(req, rule))
                 .build();
 
         final String httpMethod = "get";
@@ -68,11 +80,11 @@ public abstract class BaseOutMessageHandleService implements OutMessageHandle {
                     , config
                     , System.currentTimeMillis() - start
                     , result));
-            LOGGER.info("out message handle done,message id is {}", req.getBatchId());
+            LOGGER.info("out message handle done,message id is {}", req.getMessageId());
             return result;
         } catch (Throwable throwable) {
             LOGGER.error("out message handle exception,message id is {},body is {},rule is {}",
-                    req.getBatchId()
+                    req.getMessageId()
                     , req
                     , rule
                     , throwable);

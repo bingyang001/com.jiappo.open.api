@@ -1,22 +1,21 @@
 package com.jiappo.open.api.domain.exception;
 
 
+import com.hummer.common.exceptions.AppException;
+
 /**
  * message sign authentic exception
  *
  * @author bingy
  * @since 1.0.0
  */
-public class SignAuthException extends RuntimeException {
+public class SignAuthException extends AppException {
+    private static final long serialVersionUID = -6610609235989773199L;
     private int errorCode;
     private String message;
 
-    public SignAuthException() {
-        super();
-    }
-
     public SignAuthException(int errorCode, String message) {
-        super();
+        super(errorCode,message);
         this.errorCode = errorCode;
         this.message = message;
     }

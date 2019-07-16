@@ -53,7 +53,7 @@ public abstract class BaseInMessageHandleService implements InMessageHandle {
         verifiedPrecondition(inMessageReq, rule);
         //verified secret key
         try {
-            verifiedSecretKey(inMessageReq.getPlatformName(), inMessageReq.getSecretKey(), rule.getSecretKey());
+            verifiedSecretKey(inMessageReq.getMessageSource(), inMessageReq.getSecretKey(), rule.getSecretKey());
             eventBus.post(VerifiedSecretEvent
                     .success(inMessageReq));
         } catch (Throwable throwable) {
@@ -110,7 +110,7 @@ public abstract class BaseInMessageHandleService implements InMessageHandle {
     /**
      * verified request secret key ,if failed then throw app exception. child class can override
      *
-     * @param platformName    platform name
+     * @param messageSource    platform name
      * @param reqSecretKey    request secret key
      * @param originSecretKey db origin secret key
      * @return void
@@ -118,7 +118,7 @@ public abstract class BaseInMessageHandleService implements InMessageHandle {
      * @date 2019/7/2 18:42
      * @since 1.0.0
      **/
-    protected abstract void verifiedSecretKey(String platformName, String reqSecretKey, String originSecretKey);
+    protected abstract void verifiedSecretKey(String messageSource, String reqSecretKey, String originSecretKey);
 
     /**
      * verified request sign
@@ -147,9 +147,11 @@ public abstract class BaseInMessageHandleService implements InMessageHandle {
     public Object transfer(InMessageRule po, InMessageReq req) {
         //if use snapshot data then return ticket record data body
         if (po.getInMessageResponseSnapshotData()) {
-            //publish in message vent
-            eventBus.post(InMessageEvent.createMessageEvent(req, po));
             MessageTicketRecordPo ticketRecordPo = ticketService.queryTicket(req.getSign());
+            //publish in message vent
+            eventBus.post(InMessageEvent.createMessageEvent(req
+                    , po
+                    , ticketRecordPo.getDataBody()));
             return ticketRecordPo.getDataBody();
         }
 
@@ -164,11 +166,11 @@ public abstract class BaseInMessageHandleService implements InMessageHandle {
                     .send(config, new TypeReference<ResourceResponse>() {
                     });
             LOGGER.info("send message to {},response {}", po.getTargetHttpApi(), response);
-            eventBus.post(InMessageEvent.createMessageEvent(req, po));
-            return response;
+            eventBus.post(InMessageEvent.createMessageEvent(req, po,response.getData()));
+            return response.getData();
         } catch (Throwable throwable) {
             eventBus.post(InMessageEvent.createMessageEvent(req, po,throwable));
-            LOGGER.error("platform {} in message transfer to inner service api failed", req.getPlatformName());
+            LOGGER.error("platform {} in message transfer to inner service api failed", req.getMessageSource());
             throw throwable;
         }
     }

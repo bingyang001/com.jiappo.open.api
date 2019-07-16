@@ -15,7 +15,7 @@ import java.util.Map;
  **/
 @Getter
 public class OutMessageRule {
-    private String platformName;
+    private String messageSource;
     private String messageType;
     private String targetHttpApi;
     private String targetHttpMethod;
@@ -26,7 +26,7 @@ public class OutMessageRule {
     private String privateKey;
     private Map<String, Object> ticketField;
     private String ticketImplService;
-    private String targetPlatformName;
+    private String targetMessageSource;
 
     /**
      * builder out message rule
@@ -43,7 +43,7 @@ public class OutMessageRule {
             throw new AppException(40000, "rule not exists");
         }
 
-        this.platformName = rulePo.getPlatformName();
+        this.messageSource = rulePo.getMessageSource();
         this.messageType = rulePo.getMessageType();
         this.targetHttpApi = rulePo.getTargetHttpApi();
         this.targetHttpApi = rulePo.getTargetHttpApi();
@@ -54,7 +54,7 @@ public class OutMessageRule {
         this.privateKey = rulePo.getPrivateKey();
         this.ticketField = rulePo.getTicketField();
         this.ticketImplService = rulePo.getTicketImplService();
-        this.targetPlatformName = rulePo.getTargetPlatformName();
+        this.targetMessageSource = rulePo.getTargetMessageSource();
     }
 
     private OutMessageRule() {

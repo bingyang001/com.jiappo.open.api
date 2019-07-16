@@ -1,20 +1,19 @@
 package com.jiappo.open.api.domain.exception;
 
+import com.hummer.common.exceptions.AppException;
+
 /**
  * @Author: lee
  * @since:1.0.0
  * @Date: 2019/7/11 16:34
  **/
-public class SecretKeyAuthException extends RuntimeException {
+public class SecretKeyAuthException extends AppException {
+    private static final long serialVersionUID = -1949751485467215720L;
     private int errorCode;
     private String message;
 
-    public SecretKeyAuthException() {
-        super();
-    }
-
     public SecretKeyAuthException(int errorCode, String message) {
-        super();
+        super(errorCode,message);
         this.errorCode = errorCode;
         this.message = message;
     }

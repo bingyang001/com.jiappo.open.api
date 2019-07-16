@@ -13,7 +13,7 @@ import java.util.Map;
 @Data
 public class MessageRulePo {
     private Integer id;
-    private String platformName;
+    private String messageSource;
     private String messageType;
     private String targetHttpApi;
     private String  targetHttpMethod;
@@ -35,5 +35,5 @@ public class MessageRulePo {
     private Integer ticketExpiredTimeMinute;
     private Boolean isPreCreated;
     private Boolean inMessageResponseSnapshotData;
-    private String targetPlatformName;
+    private String targetMessageSource;
 }

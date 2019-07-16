@@ -36,7 +36,7 @@ public class OutMessageController {
         , Errors errors) {
         //verify request body
         ParameterAssertUtil.assertRequestValidated(errors);
-        req.setPlatformName(platform);
+        req.setMessageSource(platform);
         req.setMessageType(messageType);
         return ResourceResponse.ok(messageFacade.outMessage(req));
     }

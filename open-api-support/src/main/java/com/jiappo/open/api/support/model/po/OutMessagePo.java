@@ -16,7 +16,7 @@ public class OutMessagePo {
     private String messageId;
     private String messageType;
     private String messageBody;
-    private String outPlatformName;
+    private String targetMessageSource;
     private String outPlatformHttpApiHead;
     private String outPlatformHttpApi;
     private String outPlatformHttpMethod;

@@ -5,6 +5,7 @@ import com.hummer.common.security.Md5;
 import com.jiappo.open.api.dao.mapper.openapi.MessageTicketPoMapper;
 import com.jiappo.open.api.dao.mapper.openapi.MessageTicketVerifiedResultPoMapper;
 import com.jiappo.open.api.domain.ticket.BaseMessageTicket;
+import com.jiappo.open.api.domain.ticket.VerifiedStatusEnum;
 import com.jiappo.open.api.support.model.bo.TicketFieldBo;
 import com.jiappo.open.api.support.model.bo.TicketVerifiedResultBo;
 import com.jiappo.open.api.support.model.dto.inmessage.InMessageReq;
@@ -17,9 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Map;
 
 /**
+ * message ticket service
+ *
  * @Author: lee
  * @since:1.0.0
  * @Date: 2019/7/10 17:04
@@ -45,14 +49,17 @@ public class MessageTicketService {
      * @since 1.0.0
      **/
     public String newTicket(InMessageReq req, MessageRulePo po) {
+        if (po.getIsPreCreated() == null || !po.getIsPreCreated()) {
+            throw new AppException(40001, "please settings `IsPreCreated` value is true");
+        }
         //query rule
         BaseMessageTicket messageTicket = ticketMap.get(po.getTicketImplService());
         if (messageTicket == null) {
-            LOGGER.error("platformName {} message type {},ticket service {} provide business no implement"
-                    , req.getPlatformName()
+            LOGGER.error("message source {} message type {},ticket service {} provide business no implement"
+                    , req.getMessageType()
                     , req.getMessageType()
                     , po.getTicketImplService());
-            throw new AppException(4000, "message ticket rule no settings");
+            throw new AppException(40002, "message ticket rule no settings");
         }
         //builder sign field
         TicketFieldBo ticketFieldBo = TicketFieldBo
@@ -70,27 +77,29 @@ public class MessageTicketService {
         try {
             MessageTicketRecordPo recordPo = new MessageTicketRecordPo();
             recordPo.setIsPreCreated(true);
-            recordPo.setPlatformName(req.getPlatformName());
+            recordPo.setMessageSource(req.getMessageSource());
             recordPo.setExpiredDate(po.getTicketExpiredTimeMinute());
-            recordPo.setMessageId(req.getBatchId());
+            recordPo.setMessageId(req.getMessageId());
             recordPo.setMessageType(req.getMessageType());
             recordPo.setTicketValue(ticket);
             recordPo.setTicketMd5(Md5.encryptMd5(ticket));
             recordPo.setTicketType(po.getTicketImplService());
+            recordPo.setDataBody(Collections.emptyList());
+            recordPo.setVerifiedStatus(VerifiedStatusEnum.NO_VERIFIED.getCode());
             if (po.getInMessageResponseSnapshotData()) {
                 recordPo.setDataBody(req.getData());
             }
             int dbResult = ticketPoMapper.saveTicket(recordPo);
-            LOGGER.info("platformName {} message type {} ticket created success,save to db success {}"
-                    , req.getPlatformName()
+            LOGGER.info("message source {} message type {} ticket created success,save to db success {}"
+                    , req.getMessageSource()
                     , req.getMessageType()
                     , ticket
                     , dbResult);
         } catch (DuplicateKeyException e) {
             //ignore
-            LOGGER.debug("platformName {},message id {} in db already exists, so ignore DuplicateKeyException"
-                    , req.getPlatformName()
-                    , req.getBatchId());
+            LOGGER.debug("message source {},message id {} in db already exists, so ignore DuplicateKeyException"
+                    , req.getMessageSource()
+                    , req.getMessageId());
         }
         return ticket;
     }

@@ -12,7 +12,7 @@ import java.util.Date;
 @Data
 public class TicketVerifiedRecordPo {
     private Integer id;
-    private String platformName;
+    private String messageSource;
     private String messageType;
     private String messageId;
     private String ticketValue;

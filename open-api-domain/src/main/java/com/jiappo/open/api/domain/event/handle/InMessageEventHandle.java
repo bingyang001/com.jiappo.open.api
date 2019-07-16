@@ -35,7 +35,7 @@ public class InMessageEventHandle {
         TicketVerifiedRecordPo verifiedRecordPo = new TicketVerifiedRecordPo();
         verifiedRecordPo.setVerifiedStatus(event.getVerifiedStatus());
         verifiedRecordPo.setVerifiedDescribe(event.getVerifiedDescribe());
-        verifiedRecordPo.setPlatformName(event.getPlatformName());
+        verifiedRecordPo.setMessageSource(event.getMessageSource());
         verifiedRecordPo.setMessageId(event.getMessageId());
         verifiedRecordPo.setMessageType(event.getMessageType());
         verifiedRecordPo.setSecretKey(event.getSecretKey());
@@ -63,11 +63,11 @@ public class InMessageEventHandle {
         verifiedRecordPo.setTicketValue(event.getOriginTicket());
         verifiedRecordPo.setVerifiedStatus(event.getVerifiedStatus());
         verifiedRecordPo.setVerifiedDescribe(event.getVerifiedDescribe());
-        verifiedRecordPo.setPlatformName(event.getPlatformName());
         verifiedRecordPo.setMessageId(event.getMessageId());
         verifiedRecordPo.setMessageType(event.getMessageType());
         verifiedRecordPo.setTicketType(event.getVerifiedType());
         verifiedRecordPo.setSecretKey(event.getSecretKey());
+        verifiedRecordPo.setMessageSource(event.getMessageSource());
         ticketService.saveNewTicketVerifiedResult(verifiedRecordPo);
     }
 

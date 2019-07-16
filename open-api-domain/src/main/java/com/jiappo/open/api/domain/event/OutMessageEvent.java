@@ -21,7 +21,7 @@ public class OutMessageEvent {
     private String messageId;
     private String messageType;
     private String messageBody;
-    private String outPlatformName;
+    private String targetMessageSource;
     private String outPlatformHttpApiHead;
     private String outPlatformHttpApi;
     private String outPlatformHttpMethod;
@@ -37,8 +37,7 @@ public class OutMessageEvent {
             , String responseBody) {
         return OutMessageEvent
                 .builder()
-                .messageSource(req.getPlatformName())
-                .messageId(req.getBatchId())
+                .messageSource(req.getMessageSource())
                 .messageType(req.getMessageType())
                 .messageBody(JSON.toJSONString(req.getData()))
                 .outPlatformHttpApi(customConfig.getUrl())
@@ -46,7 +45,8 @@ public class OutMessageEvent {
                 .outPlatformHttpApiHead(JSON.toJSONString(customConfig.getHeaders()))
                 .outPlatformResponseCostTime(costTime.intValue())
                 .outPlatformResponseMessage(responseBody)
-                .outPlatformName(rule.getTargetPlatformName())
+                .messageId(req.getMessageId())
+                .targetMessageSource(rule.getTargetMessageSource())
                 .build();
     }
 
@@ -63,8 +63,8 @@ public class OutMessageEvent {
 
         return OutMessageEvent
                 .builder()
-                .messageSource(req.getPlatformName())
-                .messageId(req.getBatchId())
+                .messageSource(req.getMessageSource())
+                .messageId(req.getMessageId())
                 .messageType(req.getMessageType())
                 .messageBody(JSON.toJSONString(req.getData()))
                 .outPlatformHttpApi(customConfig.getUrl())
@@ -72,7 +72,7 @@ public class OutMessageEvent {
                 .outPlatformHttpApiHead(JSON.toJSONString(customConfig.getHeaders()))
                 .outPlatformResponseCostTime(costTime.intValue())
                 .outPlatformResponseCode(code)
-                .outPlatformName(rule.getTargetPlatformName())
+                .targetMessageSource(rule.getTargetMessageSource())
                 .outPlatformResponseMessage(throwable.toString())
                 .build();
     }

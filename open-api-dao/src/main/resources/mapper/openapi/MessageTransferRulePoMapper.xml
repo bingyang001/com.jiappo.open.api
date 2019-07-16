@@ -3,7 +3,7 @@
 <mapper namespace="com.jiappo.open.api.dao.mapper.openapi.MessageTransferRulePoMapper" >
   <resultMap id="BaseResultMap" type="com.jiappo.open.api.support.model.po.MessageRulePo" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="platform_name" property="platformName" jdbcType="VARCHAR" />
+    <result column="message_source" property="messageSource" jdbcType="VARCHAR" />
     <result column="message_type" property="messageType" jdbcType="VARCHAR" />
     <result column="target_http_api" property="targetHttpApi" jdbcType="VARCHAR" />
     <result column="target_http_method" property="targetHttpMethod" jdbcType="VARCHAR" />
@@ -26,15 +26,15 @@
     <result column="ticket_expired_time_minute" property="ticketExpiredTimeMinute" javaType="INTEGER"/>
     <result column="is_pre_created" property="isPreCreated" jdbcType="VARCHAR" />
     <result column="in_message_response_snapshot_data" property="inMessageResponseSnapshotData" jdbcType="BIT"/>
-    <result column="target_platform_name" property="targetPlatformName" jdbcType="VARCHAR"/>
+    <result column="target_message_source" property="targetMessageSource" jdbcType="VARCHAR"/>
   </resultMap>
 
   <select id="queryRouteSingleBy" resultMap="BaseResultMap">
     SELECT
       id,
-      platform_name,
+      message_source,
       message_type,
-      target_platform_name,
+      target_message_source,
       target_http_api,
       target_http_method,
       call_target_timeout_millisecond,
@@ -57,7 +57,7 @@
       in_message_response_snapshot_data
     FROM
       message_rule
-    WHERE platform_name=#{platformName}
+    WHERE message_source=#{messageSource}
       AND message_type=#{messageType}
       AND message_route_type=#{messageRouteType}
       AND is_deleted=0

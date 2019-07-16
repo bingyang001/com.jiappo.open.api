@@ -13,7 +13,7 @@ public interface MessageTransferRulePoMapper {
     /**
      * query message route
      *
-     * @param platformName   platform name
+     * @param messageSource   platform name
      * @param messageType      message type
      * @param messageRouteType route type . 0: in ;1: out
      * @return com.jiappo.open.openapi.support.model.po.PlatformForwarderRoutePo
@@ -21,7 +21,7 @@ public interface MessageTransferRulePoMapper {
      * @date 2019/6/27 18:28
      * @version 1.0.0
      **/
-    MessageRulePo queryRouteSingleBy(@Param("platformName") String platformName
+    MessageRulePo queryRouteSingleBy(@Param("messageSource") String messageSource
             , @Param("messageType") String messageType
             , @Param("messageRouteType") Integer messageRouteType);
 }

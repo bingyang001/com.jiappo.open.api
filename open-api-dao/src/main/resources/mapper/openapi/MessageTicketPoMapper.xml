@@ -3,7 +3,7 @@
 <mapper namespace="com.jiappo.open.api.dao.mapper.openapi.MessageTicketPoMapper" >
   <resultMap id="BaseResultMap" type="com.jiappo.open.api.support.model.po.MessageTicketRecordPo" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="platform_name" property="platformName" jdbcType="VARCHAR" />
+    <result column="message_source" property="messageSource" jdbcType="VARCHAR" />
     <result column="message_type" property="messageType" jdbcType="VARCHAR" />
     <result column="message_id" property="messageId" jdbcType="VARCHAR" />
     <result column="ticket_value" property="ticketValue" jdbcType="VARCHAR" />
@@ -15,7 +15,7 @@
     <result column="is_delete" property="isDelete" jdbcType="BIT"/>
     <result column="is_precreated" property="isPreCreated" jdbcType="BIT"/>
     <result column="data_body" property="dataBody" javaType="java.util.Collection"
-            typeHandler="com.jiappo.open.api.support.mybatis.JsonReferenceHandle" />
+            typeHandler="com.jiappo.open.api.support.mybatis.JsonReferenceHandle" jdbcType="VARCHAR"/>
   </resultMap>
 
       <insert id="saveTicket"
@@ -24,7 +24,7 @@
               keyProperty="id">
         insert into ticket_record (
                                              ticket_md5
-                                            ,platform_name
+                                            ,message_source
                                             ,message_type
                                             ,message_id
                                             ,ticket_value
@@ -33,14 +33,15 @@
                                             ,is_precreated
                                             ,data_body) values
                                     (#{ticketRecordPo.ticketMd5}
-                                    ,#{ticketRecordPo.platformName}
+                                    ,#{ticketRecordPo.messageSource}
                                     ,#{ticketRecordPo.messageType}
                                     ,#{ticketRecordPo.messageId}
                                     ,#{ticketRecordPo.ticketValue}
                                     ,#{ticketRecordPo.ticketType}
                                     ,#{ticketRecordPo.expiredDate}
                                     ,#{ticketRecordPo.isPreCreated}
-                                    ,#{ticketRecordPo.dataBody})
+                                    ,#{ticketRecordPo.dataBody
+                                    ,typeHandler=com.jiappo.open.api.support.mybatis.JsonReferenceHandle})
       </insert>
 
     <insert id="saveNewTicketVerifiedResult"  parameterType="com.jiappo.open.api.support.model.po.MessageTicketRecordPo"
@@ -48,7 +49,7 @@
             keyProperty="id">
         insert into ticket_record (
             ticket_md5
-            ,platform_name
+            ,message_source
             ,message_type
             ,message_id
             ,ticket_value
@@ -58,7 +59,7 @@
             ,verified_date
             ,verified_status) values
         (#{ticketRecordPo.ticketMd5}
-            ,#{ticketRecordPo.platformName}
+            ,#{ticketRecordPo.messageSource}
             ,#{ticketRecordPo.messageType}
             ,#{ticketRecordPo.messageId}
             ,#{ticketRecordPo.ticketValue}
@@ -72,7 +73,7 @@
     <select id="querySingleTicket" parameterType="java.lang.String" resultMap="BaseResultMap">
         select id
                 ,ticket_md5
-                ,platform_name
+                ,message_source
                 ,message_type
                 ,message_id
                 ,ticket_value

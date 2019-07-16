@@ -3,8 +3,11 @@ package com.jiappo.open.api.domain.service;
 import com.jiappo.open.api.domain.entity.OutMessageRule;
 import com.jiappo.open.api.support.model.dto.outmessage.OutMessageReq;
 import org.apache.http.Header;
+import org.apache.http.NameValuePair;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @Author: lee
@@ -25,7 +28,7 @@ public interface OutMessageHandle {
     Collection<Header> builderHeader(final OutMessageReq req, final OutMessageRule rule);
 
     /**
-     * builder body
+     * builder body,will serial json content send to server
      *
      * @param req  req message
      * @param rule message rule
@@ -35,6 +38,20 @@ public interface OutMessageHandle {
      * @since 1.0.0
      **/
     Object builderBody(final OutMessageReq req, final OutMessageRule rule);
+
+    /**
+     * builder form body content
+     *
+     * @param req  req message
+     * @param rule rule
+     * @return {@link java.util.List<org.apache.http.NameValuePair>}
+     * @author liguo
+     * @date 2019/7/16 10:31
+     * @since 1.0.0
+     **/
+    default List<NameValuePair> builderFormBody(final OutMessageReq req, final OutMessageRule rule) {
+        return Collections.emptyList();
+    }
 
     /**
      * builder target url

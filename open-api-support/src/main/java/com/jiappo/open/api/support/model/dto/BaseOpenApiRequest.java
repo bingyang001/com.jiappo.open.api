@@ -17,19 +17,19 @@ import java.util.Map;
 public abstract class BaseOpenApiRequest implements Serializable {
     private static final long serialVersionUID = 3262722339858846704L;
     /***
-     * out of service platform name
+     * message source, out of service platform name
      **/
     @ApiModelProperty(hidden = true)
-    private String platformName;
+    private String messageSource;
     /**
      * message body
      */
-    @ApiModelProperty(value = "backup filed")
+    @ApiModelProperty(value = "message body")
     private Collection<Map<String, Object>> data;
     /**
      * message batch id,need unique
      **/
-    private String batchId;
+    private String messageId;
     /***
      * message type . ie: create order,create user
      **/

@@ -22,7 +22,7 @@ public class DefaultInMessageHandleService extends BaseInMessageHandleService {
     /**
      * verified request secret key ,if failed then throw app exception. child class can override
      *
-     * @param platformName    platform name
+     * @param messageSource    platform name
      * @param reqSecretKey    request secret key
      * @param originSecretKey db origin secret key
      * @return void
@@ -31,14 +31,14 @@ public class DefaultInMessageHandleService extends BaseInMessageHandleService {
      * @since 1.0.0
      **/
     @Override
-    protected void verifiedSecretKey(String platformName, String reqSecretKey, String originSecretKey)  {
+    protected void verifiedSecretKey(String messageSource, String reqSecretKey, String originSecretKey)  {
         if (Strings.isNullOrEmpty(originSecretKey)) {
             LOGGER.warn("please settings secret key in db.");
             return;
         }
 
         if (!originSecretKey.equals(reqSecretKey)) {
-            LOGGER.error("{} request secret key not match", platformName);
+            LOGGER.error("{} request secret key not match", messageSource);
             throw new SecretKeyAuthException(ErrorConstant.SignError.SECRET_KEY_NO_MATCH_ERROR
                     , ErrorConstant.SignError.SECRET_KEY_NO_MATCH_ERROR_DOC);
         }

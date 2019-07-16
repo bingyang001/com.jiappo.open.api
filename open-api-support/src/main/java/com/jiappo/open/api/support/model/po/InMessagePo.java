@@ -17,7 +17,7 @@ import java.util.Date;
 @Setter
 public class InMessagePo {
     private Integer id;
-    private String platformName;
+    private String messageSource;
     private String messageId;
     private String messageType;
     private String messageBody;
@@ -27,4 +27,5 @@ public class InMessagePo {
     private String innerServiceHttpApi;
     private Integer innerServiceRespCode;
     private String innerServiceRespMessage;
+    private Boolean isResponseSnapshot;
 }

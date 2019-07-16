@@ -17,7 +17,7 @@ import java.util.Date;
 @Data
 @Builder
 public class VerifiedSignEvent extends VerifiedTicketEvent {
-    private String platformName;
+    private String messageSource;
     private String messageType;
     private String messageId;
     private String secretKey;
@@ -34,7 +34,6 @@ public class VerifiedSignEvent extends VerifiedTicketEvent {
      * verified success
      *
      * @param req          req message
-     * @param verifiedType verified type value secret or sign
      * @return com.jiappo.open.api.domain.event.VerifiedSignEvent
      * @author liguo
      * @date 2019/7/10 15:43
@@ -46,11 +45,11 @@ public class VerifiedSignEvent extends VerifiedTicketEvent {
                 .verifiedStatus(VerifiedStatusEnum.VERIFIED_SUCCESS.getCode())
                 .verifiedDescribe("ok")
                 .verifiedType("sign")
-                .platformName(req.getPlatformName())
+                .messageSource(req.getMessageSource())
                 .messageType(req.getMessageType())
                 .verifiedDate(new Date())
                 .secretKey(req.getSecretKey())
-                .messageId(req.getBatchId())
+                .messageId(req.getMessageId())
                 .originTicket(req.getSign())
                 .build();
     }
@@ -60,7 +59,6 @@ public class VerifiedSignEvent extends VerifiedTicketEvent {
      *
      * @param req          req message
      * @param throwable    exception
-     * @param verifiedType verified type value secret or sign
      * @return com.jiappo.open.api.domain.event.VerifiedSignEvent
      * @author liguo
      * @date 2019/7/10 15:44
@@ -86,11 +84,11 @@ public class VerifiedSignEvent extends VerifiedTicketEvent {
                 .verifiedStatus(errorCode)
                 .verifiedDescribe(errorMessage)
                 .verifiedType("sign")
-                .platformName(req.getPlatformName())
+                .messageSource(req.getMessageSource())
                 .messageType(req.getMessageType())
                 .verifiedDate(new Date())
                 .secretKey(req.getSecretKey())
-                .messageId(req.getBatchId())
+                .messageId(req.getMessageId())
                 .originTicket(req.getSign())
                 .build();
     }

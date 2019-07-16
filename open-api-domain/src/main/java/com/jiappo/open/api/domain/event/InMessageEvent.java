@@ -17,7 +17,7 @@ import lombok.Data;
 @Data
 public class InMessageEvent {
 
-    private String platformName;
+    private String messageSource;
     private String messageId;
     private String messageType;
     private String messageBody;
@@ -26,6 +26,7 @@ public class InMessageEvent {
     private String innerServiceHttpApi;
     private Integer innerServiceRespCode;
     private String innerServiceRespMessage;
+    private Boolean isResponseSnapshot;
 
     /**
      * create message event
@@ -38,14 +39,18 @@ public class InMessageEvent {
      * @since 1.0.0
      **/
     public static InMessageEvent createMessageEvent(final InMessageReq inMessageReq
-            , final InMessageRule po) {
-        return InMessageEvent.builder().platformName(inMessageReq.getPlatformName())
-                .messageId(inMessageReq.getBatchId())
+            , final InMessageRule po
+            , Object responseBody) {
+        return InMessageEvent.builder().messageSource(inMessageReq.getMessageSource())
+                .messageId(inMessageReq.getMessageId())
                 .messageBody(JSON.toJSONString(inMessageReq.getData()))
                 .messageType(inMessageReq.getMessageType())
                 .sign(inMessageReq.getSign())
                 .secretKey(inMessageReq.getSecretKey())
                 .innerServiceHttpApi(po.getTargetHttpApi())
+                .innerServiceRespCode(0)
+                .innerServiceRespMessage(JSON.toJSONString(responseBody))
+                .isResponseSnapshot(po.getInMessageResponseSnapshotData())
                 .build();
     }
 
@@ -67,13 +72,14 @@ public class InMessageEvent {
         if (throwable instanceof SysException) {
             code = ((SysException) throwable).getCode();
         }
-        return InMessageEvent.builder().platformName(inMessageReq.getPlatformName())
-                .messageId(inMessageReq.getBatchId())
+        return InMessageEvent.builder().messageSource(inMessageReq.getMessageSource())
+                .messageId(inMessageReq.getMessageId())
                 .messageBody(JSON.toJSONString(inMessageReq.getData()))
                 .sign(inMessageReq.getSign())
                 .secretKey(inMessageReq.getSecretKey())
                 .innerServiceHttpApi(po.getTargetHttpApi())
                 .messageType(inMessageReq.getMessageType())
+                .isResponseSnapshot(po.getInMessageResponseSnapshotData())
                 .innerServiceRespCode(code)
                 .innerServiceRespMessage(throwable.toString())
                 .build();

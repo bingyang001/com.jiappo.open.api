@@ -40,7 +40,7 @@ public class MessageApplication implements MessageFacade {
     @Override
     public Object inMessage(InMessageReq req) {
         log.info("begin handle in message {}", req);
-        MessageRulePo po = routeMapper.queryRouteSingleBy(req.getPlatformName()
+        MessageRulePo po = routeMapper.queryRouteSingleBy(req.getMessageSource()
                 , req.getMessageType(), 0);
         if (po == null) {
             throw new AppException(40000, "no match route provide service");
@@ -50,7 +50,8 @@ public class MessageApplication implements MessageFacade {
         if (inMessageHandle == null) {
             throw new AppException(40001, "no match route provide service");
         }
-        InMessageRule  inMessageRule=new InMessageRule(po);
+        //builder in message rule
+        InMessageRule inMessageRule = new InMessageRule(po);
         //verified
         inMessageHandle.verified(req, inMessageRule);
         //send message
@@ -69,10 +70,10 @@ public class MessageApplication implements MessageFacade {
     @Override
     public String newTicket(InMessageReq req) {
         log.info("new ticket request body is {}", req);
-        MessageRulePo po = routeMapper.queryRouteSingleBy(req.getPlatformName()
+        MessageRulePo po = routeMapper.queryRouteSingleBy(req.getMessageSource()
                 , req.getMessageType(), 0);
         if (po == null) {
-            throw new AppException(40000, "no match route provide service");
+            throw new AppException(40000, "message rule is null,please setting rule");
         }
         return messageTicketService.newTicket(req, po);
     }
@@ -90,7 +91,7 @@ public class MessageApplication implements MessageFacade {
     public Object outMessage(OutMessageReq req) {
         log.info("out message request is {}", req);
         //query message rule
-        MessageRulePo po = routeMapper.queryRouteSingleBy(req.getPlatformName()
+        MessageRulePo po = routeMapper.queryRouteSingleBy(req.getMessageSource()
                 , req.getMessageType(), 1);
         //builder domain out message rule
         OutMessageRule rule = new OutMessageRule(po);

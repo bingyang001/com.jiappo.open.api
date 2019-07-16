@@ -33,7 +33,7 @@ public class RsaMessageTicketDefault extends BaseMessageTicket {
     public void decrypt(InMessageReq inMessageReq, TicketFieldBo po) {
         String decrypt =new  Rsa(po.getPublicKey(),po.getPrivateKey()).decryptByPriavte(inMessageReq.getSign());
         if (Strings.isNullOrEmpty(decrypt)) {
-            LOGGER.error("platform {} message type {} rsa decrypt failed", inMessageReq.getPlatformName()
+            LOGGER.error("platform {} message type {} rsa decrypt failed", inMessageReq.getMessageSource()
                     , inMessageReq.getMessageType());
             throw new SignAuthException(SIGN_VERIFIED_FAILED, SIGN_VERIFIED_FAILED_DOC);
         }
@@ -53,7 +53,7 @@ public class RsaMessageTicketDefault extends BaseMessageTicket {
         String originVal = JSON.toJSONString(fieldMap);
         String val = new Rsa(po.getPublicKey(),po.getPrivateKey()).encryptByPublish(originVal);
         LOGGER.info("platform {} message type {} rsa encrypted done,origin value {} ,encrypted value {}"
-                , inMessageReq.getPlatformName()
+                , inMessageReq.getMessageSource()
                 , inMessageReq.getMessageType()
                 , originVal
                 , val);

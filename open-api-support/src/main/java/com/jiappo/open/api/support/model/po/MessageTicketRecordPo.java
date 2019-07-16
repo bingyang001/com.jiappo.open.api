@@ -15,7 +15,7 @@ import java.util.Map;
 public class MessageTicketRecordPo {
 
     private Integer id;
-    private String platformName;
+    private String messageSource;
     private String messageType;
     private String ticketValue;
     private String ticketType;

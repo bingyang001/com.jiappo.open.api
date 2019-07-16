@@ -3,7 +3,7 @@
 <mapper namespace="com.jiappo.open.api.dao.mapper.openapi.MessageTicketVerifiedResultPoMapper" >
   <resultMap id="BaseResultMap" type="com.jiappo.open.api.support.model.po.TicketVerifiedRecordPo" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="platform_name" property="platformName" jdbcType="VARCHAR" />
+    <result column="message_source" property="messageSource" jdbcType="VARCHAR" />
     <result column="message_type" property="messageType" jdbcType="VARCHAR" />
     <result column="message_id" property="messageId" jdbcType="VARCHAR" />
     <result column="ticket_value" property="ticketValue" jdbcType="VARCHAR" />
@@ -19,7 +19,7 @@
               useGeneratedKeys="true"
               keyProperty="id">
         insert into ticket_verified_record (
-            platform_name
+            message_source
                                             ,message_type
                                             ,message_id
                                             ,ticket_value
@@ -28,7 +28,7 @@
                                             ,verified_describe
                                             ,secret_key
                                             ) values
-                                    (#{ticketRecordPo.platformName}
+                                    (#{ticketRecordPo.messageSource}
                                     ,#{ticketRecordPo.messageType}
                                     ,#{ticketRecordPo.messageId}
                                     ,#{ticketRecordPo.ticketValue}

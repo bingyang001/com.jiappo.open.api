@@ -35,7 +35,7 @@ public class AesMessageTicketDefault extends BaseMessageTicket {
     public void decrypt(InMessageReq inMessageReq, TicketFieldBo po) {
         String decryptValue = Aes.decrypt(po.getPrivateKey(), po.getPublicKey(), inMessageReq.getSign());
         if (Strings.isNullOrEmpty(decryptValue)) {
-            LOGGER.error("platform {} message type {} aes decrypt failed", inMessageReq.getPlatformName()
+            LOGGER.error("platform {} message type {} aes decrypt failed", inMessageReq.getMessageSource()
                     , inMessageReq.getMessageType());
             throw new SignAuthException(SIGN_VERIFIED_FAILED, SIGN_VERIFIED_FAILED_DOC);
         }
@@ -56,7 +56,7 @@ public class AesMessageTicketDefault extends BaseMessageTicket {
         String aesString = Aes.encryptToString(po.getPrivateKey()
                 , po.getPublicKey(), JSON.toJSONString(fieldMap));
         LOGGER.info("platform {} message type {} sign done {}"
-                , inMessageReq.getPlatformName()
+                , inMessageReq.getMessageSource()
                 , inMessageReq.getMessageType()
                 , aesString);
 

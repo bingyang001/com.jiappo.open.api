@@ -3,7 +3,7 @@
 <mapper namespace="com.jiappo.open.api.dao.mapper.openapi.InMessagePoMapper" >
   <resultMap id="BaseResultMap" type="com.jiappo.open.api.support.model.po.InMessagePo" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="platform_name" property="platformName" jdbcType="VARCHAR" />
+    <result column="message_source" property="messageSource" jdbcType="VARCHAR" />
     <result column="message_type" property="messageType" jdbcType="VARCHAR" />
     <result column="message_id" property="messageId" jdbcType="VARCHAR" />
     <result column="message_body" property="messageBody"/>
@@ -13,6 +13,7 @@
     <result column="inner_service_http_api" property="innerServiceHttpApi" jdbcType="VARCHAR" />
     <result column="inner_service_resp_code" property="innerServiceRespCode" jdbcType="INTEGER"/>
     <result column="inner_service_resp_message" property="innerServiceRespMessage" jdbcType="VARCHAR"/>
+    <result column="is_response_snapshot" property="isResponseSnapshot" jdbcType="BIT"/>
   </resultMap>
 
       <insert id="save"
@@ -20,7 +21,7 @@
               useGeneratedKeys="true"
               keyProperty="id">
         insert into in_message (
-                                             platform_name
+            message_source
                                             ,message_type
                                             ,message_id
                                             ,message_body
@@ -28,8 +29,9 @@
                                             ,secret_key
                                             ,inner_service_http_api
                                             ,inner_service_resp_code
-                                            ,inner_service_resp_message) values
-                                    (#{inMessagePo.platformName}
+                                            ,inner_service_resp_message
+                                            ,is_response_snapshot) values
+                                    (#{inMessagePo.messageSource}
                                     ,#{inMessagePo.messageType}
                                     ,#{inMessagePo.messageId}
                                     ,#{inMessagePo.messageBody}
@@ -37,7 +39,8 @@
                                     ,#{inMessagePo.secretKey}
                                     ,#{inMessagePo.innerServiceHttpApi}
                                     ,#{inMessagePo.innerServiceRespCode}
-                                    ,#{inMessagePo.innerServiceRespMessage})
+                                    ,#{inMessagePo.innerServiceRespMessage}
+                                    ,#{inMessagePo.isResponseSnapshot})
       </insert>
 
 

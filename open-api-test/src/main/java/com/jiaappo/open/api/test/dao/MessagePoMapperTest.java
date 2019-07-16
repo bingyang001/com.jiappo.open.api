@@ -26,7 +26,7 @@ public class MessagePoMapperTest extends BaseTest {
     public void queryRoute() {
         MessageRulePo po = routeMapper.queryRouteSingleBy("platform_A"
                 , "create_user", 0);
-        Assert.assertEquals("platform_A", po.getPlatformName());
+        Assert.assertEquals("platform_A", po.getMessageSource());
     }
 
 
