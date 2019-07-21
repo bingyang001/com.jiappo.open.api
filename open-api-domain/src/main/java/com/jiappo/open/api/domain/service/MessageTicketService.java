@@ -83,8 +83,10 @@ public class MessageTicketService {
                         , req.getMessageSource()
                         , req.getMessageType()
                         , ticket);
-                ticketRecordPo.setDataBody(req.getData());
-                ticketPoMapper.setTicketSnapshotData(ticketRecordPo);
+                if(po.getInMessageResponseSnapshotData()) {
+                    ticketRecordPo.setDataBody(req.getData());
+                    ticketPoMapper.setTicketSnapshotData(ticketRecordPo);
+                }
                 return ticket;
             } else {
                 throw new AppException(40000, String.format("message source %s type %s not match"
