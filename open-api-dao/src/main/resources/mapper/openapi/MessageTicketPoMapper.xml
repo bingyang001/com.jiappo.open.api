@@ -85,7 +85,7 @@
                 ,is_delete
                 ,is_precreated
                 ,data_body
-        from ticket_record where ticket_md5=#{ticketMd5Value};
+        from ticket_record where ticket_md5=#{ticketMd5Value} limit 1;
 
     </select>
 
@@ -93,6 +93,12 @@
         update ticket_record set
                                          verified_status=#{ticketRecordPo.verifiedStatus}
                                          ,verified_date=now()
+         where id=#{ticketRecordPo.id}
+    </update>
+
+    <update id="setTicketSnapshotData" parameterType="com.jiappo.open.api.support.model.po.MessageTicketRecordPo">
+        update ticket_record set data_body=#{ticketRecordPo.data_body
+         ,typeHandler=com.jiappo.open.api.support.mybatis.JsonReferenceHandle}}
          where id=#{ticketRecordPo.id}
     </update>
 </mapper>

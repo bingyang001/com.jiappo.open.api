@@ -53,4 +53,11 @@ public interface MessageTicketPoMapper {
      * @since 1.0.0
      **/
     int setTicketVerifiedResult(@Param("ticketRecordPo") MessageTicketRecordPo ticketRecordPo);
+
+    /**
+     * update  ticket snapshot
+     * @param ticketRecordPo ticket po
+     * @return
+     */
+    int setTicketSnapshotData(@Param("ticketRecordPo") MessageTicketRecordPo ticketRecordPo);
 }

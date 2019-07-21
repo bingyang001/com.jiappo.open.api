@@ -72,7 +72,26 @@ public class MessageTicketService {
                 .build();
         //encrypted
         String ticket = messageTicket.encryption(req, ticketFieldBo);
+        MessageTicketRecordPo ticketRecordPo = queryTicket(ticket);
+        //already  exists ticket then update snapshot data
+        if (ticketRecordPo != null
+                && ticketRecordPo.getVerifiedStatus() == VerifiedStatusEnum.NO_VERIFIED.getCode()) {
 
+            if (ticketRecordPo.getMessageSource().equalsIgnoreCase(req.getMessageSource())
+                    && ticketRecordPo.getMessageType().equalsIgnoreCase(req.getMessageType())) {
+                LOGGER.warn("message source  {} ,type {} already exists not used ticket, return this ticket {}"
+                        , req.getMessageSource()
+                        , req.getMessageType()
+                        , ticket);
+                ticketRecordPo.setDataBody(req.getData());
+                ticketPoMapper.setTicketSnapshotData(ticketRecordPo);
+                return ticket;
+            } else {
+                throw new AppException(40000, String.format("message source %s type %s not match"
+                        , req.getMessageSource()
+                        , req.getMessageType()));
+            }
+        }
         //
         try {
             MessageTicketRecordPo recordPo = new MessageTicketRecordPo();
@@ -90,7 +109,7 @@ public class MessageTicketService {
                 recordPo.setDataBody(req.getData());
             }
             int dbResult = ticketPoMapper.saveTicket(recordPo);
-            LOGGER.info("message source {} message type {} ticket created success,save to db success {}"
+            LOGGER.info("message source {} message type {} ticket created success,save to db success {},{}"
                     , req.getMessageSource()
                     , req.getMessageType()
                     , ticket
