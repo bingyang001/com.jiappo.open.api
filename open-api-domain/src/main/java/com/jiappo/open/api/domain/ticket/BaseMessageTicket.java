@@ -55,7 +55,7 @@ public abstract class BaseMessageTicket implements InMessageSign, OutMessageSign
 
         if (appendSignExpiredTime) {
             fieldMap.put("_expired_", po.getExpiredMinute());
-            LOGGER.info("message {} ,now time is {} after {} expired"
+            LOGGER.info("message {} ,now time is after  {} minute expired"
                     , inMessageReq.getMessageType()
                     , po.getExpiredMinute());
         }
@@ -74,7 +74,10 @@ public abstract class BaseMessageTicket implements InMessageSign, OutMessageSign
                 }
             }
         }
-
+        LOGGER.debug("message source {} type {} encrypted filed {}"
+                , inMessageReq.getMessageSource()
+                , inMessageReq.getMessageType()
+                , fieldMap);
         return fieldMap;
     }
 
@@ -99,6 +102,12 @@ public abstract class BaseMessageTicket implements InMessageSign, OutMessageSign
         // verified is exists and is delete and is expired,any no match then throw exception
         MessageTicketRecordPo ticketRecordPo = ticketService.queryTicket(inMessageReq.getSign());
         if (ticketRecordPo == null) {
+            throw new SignAuthException(SIGN_STRING_NO_EXISTS, SIGN_STRING_NO_EXISTS_DOC);
+        }
+
+        //verified message source and message type
+        if (!ticketRecordPo.getMessageSource().equalsIgnoreCase(inMessageReq.getMessageSource())
+                || !ticketRecordPo.getMessageType().equalsIgnoreCase(inMessageReq.getMessageType())) {
             throw new SignAuthException(SIGN_STRING_NO_EXISTS, SIGN_STRING_NO_EXISTS_DOC);
         }
 

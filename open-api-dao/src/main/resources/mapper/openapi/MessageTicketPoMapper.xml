@@ -85,7 +85,7 @@
                 ,is_delete
                 ,is_precreated
                 ,data_body
-        from ticket_record where ticket_md5=#{ticketMd5Value} limit 1;
+        from ticket_record where ticket_md5=#{ticketMd5Value} order by created_date desc limit 1;
 
     </select>
 
@@ -97,8 +97,8 @@
     </update>
 
     <update id="setTicketSnapshotData" parameterType="com.jiappo.open.api.support.model.po.MessageTicketRecordPo">
-        update ticket_record set data_body=#{ticketRecordPo.data_body
-         ,typeHandler=com.jiappo.open.api.support.mybatis.JsonReferenceHandle}}
+        update ticket_record set data_body=#{ticketRecordPo.dataBody
+         ,typeHandler=com.jiappo.open.api.support.mybatis.JsonReferenceHandle}
          where id=#{ticketRecordPo.id}
     </update>
 </mapper>

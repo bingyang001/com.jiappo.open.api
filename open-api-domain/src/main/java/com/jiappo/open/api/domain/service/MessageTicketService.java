@@ -2,6 +2,7 @@ package com.jiappo.open.api.domain.service;
 
 import com.hummer.common.exceptions.AppException;
 import com.hummer.common.security.Md5;
+import com.hummer.common.utils.DateUtil;
 import com.jiappo.open.api.dao.mapper.openapi.MessageTicketPoMapper;
 import com.jiappo.open.api.dao.mapper.openapi.MessageTicketVerifiedResultPoMapper;
 import com.jiappo.open.api.domain.ticket.BaseMessageTicket;
@@ -19,6 +20,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -73,9 +75,11 @@ public class MessageTicketService {
         //encrypted
         String ticket = messageTicket.encryption(req, ticketFieldBo);
         MessageTicketRecordPo ticketRecordPo = queryTicket(ticket);
-        //already  exists ticket then update snapshot data
+        //already  exists ticket and no used and no expired then update snapshot data
         if (ticketRecordPo != null
-                && ticketRecordPo.getVerifiedStatus() == VerifiedStatusEnum.NO_VERIFIED.getCode()) {
+                && ticketRecordPo.getVerifiedStatus() == VerifiedStatusEnum.NO_VERIFIED.getCode()
+                && DateUtil.addMinute(ticketRecordPo.getCreatedDate()
+                , ticketRecordPo.getExpiredDate()).after(new Date())) {
 
             if (ticketRecordPo.getMessageSource().equalsIgnoreCase(req.getMessageSource())
                     && ticketRecordPo.getMessageType().equalsIgnoreCase(req.getMessageType())) {
@@ -83,7 +87,7 @@ public class MessageTicketService {
                         , req.getMessageSource()
                         , req.getMessageType()
                         , ticket);
-                if(po.getInMessageResponseSnapshotData()) {
+                if (po.getInMessageResponseSnapshotData()) {
                     ticketRecordPo.setDataBody(req.getData());
                     ticketPoMapper.setTicketSnapshotData(ticketRecordPo);
                 }

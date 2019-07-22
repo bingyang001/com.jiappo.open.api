@@ -54,6 +54,7 @@ public class Md5MessageTicketDefault extends BaseMessageTicket {
                 , po
                 , false
                 , false);
+        signFieldMap.put("_key_", po.getPublicKey());
         String signJson = JSON.toJSONString(signFieldMap);
         String md5String = Md5.encryptMd5(signJson);
         LOGGER.info("create sign done ,md5 string is :{}", md5String);
