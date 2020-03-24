@@ -2,18 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.jiappo</groupId>
-    <artifactId>jiappo-open-api</artifactId>
+    <groupId>com.panli</groupId>
+    <artifactId>service-delivery</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <modules>
-        <module>open-api</module>
-        <module>open-api-domain</module>
-        <module>open-api-dao</module>
-        <module>open-api-integration</module>
-        <module>open-api-support</module>
-        <module>open-api-application</module>
-        <module>open-api-test</module>
-        <module>open-api-facade</module>
+        <module>service-delivery-api</module>
+        <module>service-delivery-domain</module>
+        <module>service-delivery-dao</module>
+        <module>service-delivery-integration</module>
+        <module>service-delivery-support</module>
+        <module>service-delivery-application</module>
+        <module>service-delivery-test</module>
+        <module>service-delivery-facade</module>
     </modules>
     <parent>
         <artifactId>hummer-boot-starter</artifactId>
@@ -21,8 +21,8 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <packaging>pom</packaging>
-    <name>jiappo-open-api</name>
-    <description>jiappo-open-api project for Spring Boot</description>
+    <name>service-delivery</name>
+    <description>service-delivery project for Spring Boot</description>
     <distributionManagement>
         <repository>
             <id>maven-releases</id>
@@ -97,38 +97,38 @@
 
         <dependencies>
             <dependency>
-                <groupId>com.jiappo</groupId>
-                <artifactId>open-api-application</artifactId>
+                <groupId>com.panli</groupId>
+                <artifactId>service-delivery-application</artifactId>
                 <version>${open.api.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.jiappo</groupId>
-                <artifactId>open-api-domain</artifactId>
+                <groupId>com.panli</groupId>
+                <artifactId>service-delivery-domain</artifactId>
                 <version>${open.api.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.jiappo</groupId>
-                <artifactId>open-api-integration</artifactId>
+                <groupId>com.panli</groupId>
+                <artifactId>service-delivery-integration</artifactId>
                 <version>${open.api.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.jiappo</groupId>
-                <artifactId>open-api-dao</artifactId>
+                <groupId>com.panli</groupId>
+                <artifactId>service-delivery-dao</artifactId>
                 <version>${open.api.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.jiappo</groupId>
-                <artifactId>open-api-facade</artifactId>
+                <groupId>com.panli</groupId>
+                <artifactId>service-delivery-facade</artifactId>
                 <version>${open.api.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.jiappo</groupId>
-                <artifactId>open-api</artifactId>
+                <groupId>com.panli</groupId>
+                <artifactId>service-delivery</artifactId>
                 <version>${open.api.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.jiappo</groupId>
-                <artifactId>open-api-support</artifactId>
+                <groupId>com.panli</groupId>
+                <artifactId>service-delivery-support</artifactId>
                 <version>${open.api.version}</version>
             </dependency>
             <!--hummer framework-->
