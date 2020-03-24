@@ -1,6 +1,7 @@
 package com.jiappo.open.api.domain.ticket;
 
-import com.hummer.spring.plugin.context.SpringApplicationContext;
+
+import com.hummer.core.SpringApplicationContext;
 import com.jiappo.open.api.domain.exception.ServiceProviderNotFindException;
 
 import java.util.Map;
@@ -24,7 +25,7 @@ public class MessageSignFactory {
     public static BaseMessageTicket factory(final String signType) {
 
         Map<String, BaseMessageTicket> signMap = SpringApplicationContext
-                .getBeans(BaseMessageTicket.class);
+                .getBeansAsMap(BaseMessageTicket.class);
 
         if (!signMap.containsKey(signType)) {
             throw new ServiceProviderNotFindException(50000, "sig provider not find");

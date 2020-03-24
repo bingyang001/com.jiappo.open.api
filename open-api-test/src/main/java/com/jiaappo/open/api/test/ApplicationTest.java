@@ -1,7 +1,7 @@
 package com.jiaappo.open.api.test;
 
 
-import com.hummer.spring.plugin.context.init.HummerApplicationStart;
+import com.hummer.core.init.HummerApplicationStart;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;
 
