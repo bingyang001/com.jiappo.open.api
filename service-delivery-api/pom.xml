@@ -20,31 +20,36 @@
         </dependency>
         <dependency>
             <groupId>com.panli</groupId>
-            <artifactId>service-delivery-application</artifactId>
+            <artifactId>service-delivery-facade</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.panli</groupId>
+            <artifactId>service-delivery-dao</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.panli</groupId>
+            <artifactId>service-delivery-integration</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.panli</groupId>
+            <artifactId>service-delivery-domain</artifactId>
+        </dependency>
+        <!--hummer-->
+        <dependency>
+            <groupId>com.hummer</groupId>
+            <artifactId>hummer-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.hummer</groupId>
+            <artifactId>hummer-rest</artifactId>
+        </dependency>
+
+        <!--other framework-->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- Cucumber-->
-        <!--<dependency>-->
-            <!--<groupId>info.cukes</groupId>-->
-            <!--<artifactId>cucumber-java</artifactId>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>info.cukes</groupId>-->
-            <!--<artifactId>cucumber-junit</artifactId>-->
-
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>info.cukes</groupId>-->
-            <!--<artifactId>cucumber-spring</artifactId>-->
-
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
         <!--this framework reference jar-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -69,12 +74,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.h2database</groupId>-->
-            <!--<artifactId>h2</artifactId>-->
-            <!--<scope>runtime</scope>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -97,20 +96,10 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
-
         </dependency>
         <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
-
-        </dependency>
-        <dependency>
-            <groupId>com.hummer</groupId>
-            <artifactId>hummer-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.hummer</groupId>
-            <artifactId>hummer-rest</artifactId>
         </dependency>
     </dependencies>
 

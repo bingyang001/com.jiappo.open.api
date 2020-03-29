@@ -1,4 +1,4 @@
-package com.panli.service.delivery.api;
+package com.panli.service.delivery.api.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,20 +25,19 @@ public class SwaggerConfiguration {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.jiappo.open.api.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.panli.service.delivery.api.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(apiInfo());
     }
 
     private ApiInfo apiInfo() {
-        ApiInfo apiInfo = new ApiInfo(
+        return new ApiInfo(
                 "jiappo open-api REST API",
                 "Application manager REST API documentation.",
                 "API 1.0",
                 "Terms of services based into company terms of use",
                 new Contact("yourCompany", null, "liguo@hujiang.com"),
                 "License of API for YourCompany use only", null, Collections.emptyList());
-        return apiInfo;
     }
 }
