@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.panli.service.delivery.dao.OrderDao">
+
+    <resultMap id="BaseResultMap"
+               type="com.panli.service.delivery.support.model.po.OrderPo">
+        <id column="id" property="orderId"/>
+        <result column="order_title" property="orderTitle"/>
+        <result column="user_id" property="userId"/>
+        <result column="created_user_id" property="createdUserId"/>
+        <result column="created_date_time" property="createdDateTime"/>
+        <result column="last_modified_date_time" property="lastModifiedDateTime"/>
+        <result column="last_modified_user_id" property="lastModifiedUserId"/>
+    </resultMap>
+
+
+    <insert id="save"
+            parameterType="com.panli.service.delivery.support.model.po.OrderPo"
+            keyColumn="id"
+            keyProperty="id"
+            useGeneratedKeys="true">
+        insert into `order_demo` (order_title, user_id)
+        values (#{orderPo.orderTitle}, #{orderPo.userId})
+    </insert>
+</mapper>
+

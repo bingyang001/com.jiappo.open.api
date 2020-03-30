@@ -13,10 +13,10 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 **/
 @SpringBootApplication(scanBasePackages = "com.panli.service.delivery")
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-public class OpenApiApplication {
+public class ApiApplication {
 
     public static void main(String[] args) {
-        HummerApplicationStart.start(OpenApiApplication.class,args);
+        HummerApplicationStart.start(ApiApplication.class,args);
     }
 
 }
