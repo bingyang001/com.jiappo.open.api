@@ -72,7 +72,7 @@
         <rest-locations>com.hummer.hummer-framework.web</rest-locations>
         <slf4j-api.version>1.7.25</slf4j-api.version>
         <hummer.version>1.0.0-SNAPSHOT</hummer.version>
-        <spring-boot.version>2.1.0.RELEASE</spring-boot.version>
+        <spring-boot.version>2.2.11.RELEASE</spring-boot.version>
         <httpasync.version>4.1.2</httpasync.version>
         <fastjson.version>1.2.58</fastjson.version>
         <javax.servlet.version>3.1.0</javax.servlet.version>
